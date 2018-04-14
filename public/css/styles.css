@@ -1,7 +1,7 @@
 *, *:before, *:after {
     box-sizing: border-box;
     
-    border: 2px dotted red;
+    border: 2px dotted green;
 }
 
 body {
@@ -39,7 +39,7 @@ h1 {
 }
 
 .button {
-    background-color: yellow;
+    border: 5px solid black;
     width: 50px;
     
     font-size: 1.2em;
@@ -47,4 +47,16 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.number {
+    background: #f3f3f3;
+    border-bottom-color: #050505;
+    border-right-color: #383838;
+    border-top-color: #fbfbfb;
+    border-left-color: #e2e2e2;
+}
+
+.operation {
+    background: rgb(255,0,0);
 }
