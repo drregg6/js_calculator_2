@@ -1,5 +1,7 @@
 *, *:before, *:after {
     box-sizing: border-box;
+    
+    border: 2px dotted red;
 }
 
 body {
@@ -14,10 +16,33 @@ h1 {
     color: purple;
 }
 
-section {
+.calculator {
     margin: 0 auto;
     width: 440px;
     height: 440px;
     
     box-shadow: 10px 10px 5px #3f3f3f;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-row {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.number {
+    background-color: yellow;
+    width: 50px;
+    
+    font-size: 1.2em;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
