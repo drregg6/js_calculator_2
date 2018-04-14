@@ -1,7 +1,7 @@
 *, *:before, *:after {
     box-sizing: border-box;
     
-    border: 2px dotted green;
+/*    border: 2px dotted green;*/
 }
 
 body {
@@ -27,11 +27,19 @@ h1 {
     flex-direction: column;
 }
 
+.screen {
+    margin: 25px auto;
+    padding: 0 5px;
+    width: 80%;
+    background: green;
+    text-align: right;
+    
+    box-shadow: -5px 0 0 black;
+}
+
 .buttons {
-/*
-    margin-top: 5px;
-    margin-bottom: 5px;
-*/
+    margin-top: 1px;
+    margin-bottom: 1px;
     
     display: flex;
     flex-wrap: nowrap;
@@ -66,5 +74,9 @@ h1 {
 }
 
 .operation {
-    background: rgb(255,0,0);
+    background: #f00;
+    border-bottom-color: #600;
+    border-right-color: #a00;
+    border-top-color: #faa;
+    border-left-color: #f66;
 }
