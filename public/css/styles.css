@@ -57,6 +57,14 @@ h1 {
     border-left-color: #e2e2e2;
 }
 
+.number-pressed {
+    background: #5a5a5a;
+    border-bottom-color: #000;
+    border-right-color: #000;
+    border-top-color: #eaeaea;
+    border-left-color: #d1d1d1;
+}
+
 .operation {
     background: rgb(255,0,0);
 }
