@@ -10,6 +10,8 @@ let sevenButton = document.querySelector('#seven');
 let eightButton = document.querySelector('#eight');
 let nineButton = document.querySelector('#nine');
 
+let screen = document.querySelector('.screen');
+let displayStr = screen.firstChild.nextSibling;
 
 // button effects
 numbers.forEach(function(number) {
@@ -18,19 +20,33 @@ numbers.forEach(function(number) {
     });
     number.addEventListener('mouseup', function(ev) {
         this.classList.remove('number-pressed');
-    })
+    });
+    number.addEventListener('click', function(ev) {
+        let pressedStr = this.firstChild.nextSibling.textContent;
+        let pressedNum = parseInt(pressedStr);
+        console.log(pressedStr);
+        console.log(pressedNum);
+        
+        if (displayStr.textContent === '0') {
+            displayStr.textContent = pressedStr;
+        } else {
+            displayStr.textContent = displayStr.textContent + pressedStr;
+        }
+    });
 });
-zeroButton.addEventListener('click', ev => console.log('Zero!'));
-oneButton.addEventListener('click', ev => {
-    console.log(ev);
-});
-twoButton.addEventListener('click', ev => {
-    console.log(ev);
-});
-threeButton.addEventListener('click', ev => console.log('Three!'));
-fourButton.addEventListener('click', ev => console.log('Four!'));
-fiveButton.addEventListener('click', ev => console.log('Five!'));
-sixButton.addEventListener('click', ev => console.log('Six!'));
-sevenButton.addEventListener('click', ev => console.log('Seven!'));
-eightButton.addEventListener('click', ev => console.log('Eight!'));
-nineButton.addEventListener('click', ev => console.log('Nine!'));
+//zeroButton.addEventListener('click', ev => console.log('Zero!'));
+//oneButton.addEventListener('click', function(ev) {
+//    let num = parseInt(this.firstChild.nextSibling.innerText);
+//    console.log(ev);
+//    console.log(num);
+//});
+//twoButton.addEventListener('click', ev => {
+//    console.log(ev);
+//});
+//threeButton.addEventListener('click', ev => console.log('Three!'));
+//fourButton.addEventListener('click', ev => console.log('Four!'));
+//fiveButton.addEventListener('click', ev => console.log('Five!'));
+//sixButton.addEventListener('click', ev => console.log('Six!'));
+//sevenButton.addEventListener('click', ev => console.log('Seven!'));
+//eightButton.addEventListener('click', ev => console.log('Eight!'));
+//nineButton.addEventListener('click', ev => console.log('Nine!'));
