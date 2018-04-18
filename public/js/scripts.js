@@ -8,12 +8,17 @@ let equals = document.querySelector('#equals');
 let clear = document.querySelector('#clear');
 
 let screen = document.querySelector('.screen');
-let displayStr = screen.firstChild.nextSibling;
+let displayString = screen.firstChild.nextSibling;
 
 let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
 let isDividing = false;
+
+let storedNumber = 0;
+let currentNumber = 0;
+
+
 
 numbers.forEach(function(number) {
     // button pressdown effect
@@ -25,15 +30,13 @@ numbers.forEach(function(number) {
     });
     // screen display effect
     number.addEventListener('click', function(ev) {
-        let pressedStr = this.firstChild.nextSibling.textContent;
-        let pressedNum = parseInt(pressedStr);
+        let pressedString = this.firstChild.nextSibling;
         
         
-        
-        if (displayStr.textContent === '0') {
-            displayStr.textContent = pressedStr;
+        if (displayString.textContent === '0') {
+            displayString.textContent = pressedString.textContent;
         } else {
-            displayStr.textContent = displayStr.textContent + pressedStr;
+            displayString.textContent = displayString.textContent + pressedString.textContent;
         }
     });
 });
@@ -72,7 +75,10 @@ equals.addEventListener('click', function(ev) {
      alert('Hello world!');
 });
 clear.addEventListener('click', function(ev) {
-     alert('Hello world!');
+    resetFlags();
+    storedNumber = 0;
+    currentNumber = 0;
+    displayString.textContent = '0';
 });
 
 
