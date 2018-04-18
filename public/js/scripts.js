@@ -1,9 +1,19 @@
+// grabbing buttons
 let numbers = document.querySelectorAll('.number');
+let add = document.querySelector('#add');
+let subtract = document.querySelector('#subtract');
+let divide = document.querySelector('#divide');
+let multiply = document.querySelector('#multiply');
+let equals = document.querySelector('#equals');
+let clear = document.querySelector('#clear');
 
 let screen = document.querySelector('.screen');
 let displayStr = screen.firstChild.nextSibling;
 
-
+let isAdding = false;
+let isSubtracting = false;
+let isMultiplying = false;
+let isDividing = false;
 
 numbers.forEach(function(number) {
     // button pressdown effect
@@ -28,6 +38,28 @@ numbers.forEach(function(number) {
     });
 });
 
+add.addEventListener('click', function(ev) {
+    resetFlags();
+     isAdding = true;
+});
+subtract.addEventListener('click', function(ev) {
+    resetFlags();
+    isSubtracting = true;
+});
+multiply.addEventListener('click', function(ev) {
+    resetFlags();
+     isMultiplying = true;
+});
+divide.addEventListener('click', function(ev) {
+    resetFlags();
+     isDividing = true;
+});
+equals.addEventListener('click', function(ev) {
+     alert('Hello world!');
+});
+clear.addEventListener('click', function(ev) {
+     alert('Hello world!');
+});
 
 
 
@@ -45,7 +77,12 @@ numbers.forEach(function(number) {
 
 
 
-
+function resetFlags() {
+    isSubtracting = false;
+    isDividing = false;
+    isAdding = false;
+    isMultiplying = false;
+}
 
 //let zeroButton = document.querySelector('#zero');
 //let oneButton = document.querySelector('#one');
