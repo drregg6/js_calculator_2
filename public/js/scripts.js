@@ -38,9 +38,23 @@ numbers.forEach(function(number) {
     });
 });
 
+
+// condense this into one function with terms depending on the button pressed
+/*
+
+operations.forEach(function(operation) {
+    operation.addEventListener(function(ev) {
+        
+        // this won't work but something similar!
+        ev.srcElement.attributes.id
+        let operationType = document.querySelector(`.operation[id="${ev.id}"]`)
+    })
+})
+
+*/
 add.addEventListener('click', function(ev) {
     resetFlags();
-     isAdding = true;
+    isAdding = true;
 });
 subtract.addEventListener('click', function(ev) {
     resetFlags();
@@ -48,7 +62,7 @@ subtract.addEventListener('click', function(ev) {
 });
 multiply.addEventListener('click', function(ev) {
     resetFlags();
-     isMultiplying = true;
+    isMultiplying = true;
 });
 divide.addEventListener('click', function(ev) {
     resetFlags();
@@ -82,6 +96,19 @@ function resetFlags() {
     isDividing = false;
     isAdding = false;
     isMultiplying = false;
+}
+
+function adding(a, b) {
+    return a + b;
+}
+function subtracting(a, b) {
+    return a - b;
+}
+function multiplying(a, b) {
+    return a * b;
+}
+function dividing(a, b) {
+    return a / b;
 }
 
 //let zeroButton = document.querySelector('#zero');
