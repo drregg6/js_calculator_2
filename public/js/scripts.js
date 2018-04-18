@@ -10,11 +10,14 @@ let clear = document.querySelector('#clear');
 let screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
+// operations flags
 let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
 let isDividing = false;
+let isEqualling = false;
 
+// data storage
 let storedNumber = 0;
 let currentNumber = 0;
 
@@ -31,11 +34,14 @@ numbers.forEach(function(number) {
     // screen display effect
     number.addEventListener('click', function(ev) {
         let pressedString = this.firstChild.nextSibling;
+        let pressedInt = parseInt(pressedString);
         
         
         if (displayString.textContent === '0') {
             displayString.textContent = pressedString.textContent;
+            currentNumber = pressedInt;
         } else {
+            currentNumber = parseInt(displayString.textContent + pressedString.textContent);
             displayString.textContent = displayString.textContent + pressedString.textContent;
         }
     });
@@ -69,10 +75,11 @@ multiply.addEventListener('click', function(ev) {
 });
 divide.addEventListener('click', function(ev) {
     resetFlags();
-     isDividing = true;
+    isDividing = true;
 });
 equals.addEventListener('click', function(ev) {
-     alert('Hello world!');
+    resetFlags();
+    isEqualling = true;
 });
 clear.addEventListener('click', function(ev) {
     resetFlags();
@@ -102,6 +109,7 @@ function resetFlags() {
     isDividing = false;
     isAdding = false;
     isMultiplying = false;
+    isEqualling = false;
 }
 
 function adding(a, b) {
