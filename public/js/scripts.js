@@ -11,6 +11,7 @@ let screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
 // operations flags
+let isOperating = false;
 let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
@@ -40,7 +41,9 @@ numbers.forEach(function(number) {
         if (displayString.textContent === '0') {
             displayString.textContent = pressedString.textContent;
             currentNumber = pressedInt;
-        } else if (isAdding || isDividing || isMultiplying || isSubtracting) {
+        } else if (isOperating) {
+            isOperating = false;
+            storedNumber = currentNumber;
             displayString.textContent = pressedString.textContent;
             currentNumber = pressedInt;
         } else {
@@ -66,30 +69,44 @@ operations.forEach(function(operation) {
 */
 add.addEventListener('click', function(ev) {
     resetFlags();
+    isOperating = true;
     isAdding = true;
-    savedNumber = currentNumber;
 });
 subtract.addEventListener('click', function(ev) {
     resetFlags();
+    isOperating = true;
     isSubtracting = true;
-    savedNumber = currentNumber;
 });
 multiply.addEventListener('click', function(ev) {
     resetFlags();
+    isOperating = true;
     isMultiplying = true;
-    savedNumber = currentNumber;
 });
 divide.addEventListener('click', function(ev) {
     resetFlags();
+    isOperating = true;
     isDividing = true;
-    savedNumber = currentNumber;
 });
 equals.addEventListener('click', function(ev) {
+    if (isAdding) {
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isSubtracting) {
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isMultiplying) {
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isDividing) {
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    }
     resetFlags();
     isEqualling = true;
 });
 clear.addEventListener('click', function(ev) {
     resetFlags();
+    isOperating = false;
     storedNumber = 0;
     currentNumber = 0;
     displayString.textContent = '0';
