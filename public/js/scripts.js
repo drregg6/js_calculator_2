@@ -1,13 +1,13 @@
 // grabbing buttons
-let numbers = document.querySelectorAll('.number');
-let add = document.querySelector('#add');
-let subtract = document.querySelector('#subtract');
-let divide = document.querySelector('#divide');
-let multiply = document.querySelector('#multiply');
-let equals = document.querySelector('#equals');
-let clear = document.querySelector('#clear');
+const numbers = document.querySelectorAll('.number');
+const add = document.querySelector('#add');
+const subtract = document.querySelector('#subtract');
+const divide = document.querySelector('#divide');
+const multiply = document.querySelector('#multiply');
+const equals = document.querySelector('#equals');
+const clear = document.querySelector('#clear');
 
-let screen = document.querySelector('.screen');
+const screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
 // operations flags

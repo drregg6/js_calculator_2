@@ -1,5 +1,5 @@
 *, *:before, *:after {
-    box-sizing: border-box;
+/*    box-sizing: border-box;*/
     
 /*    border: 2px dotted green;*/
 }
@@ -19,38 +19,45 @@ h1 {
 .calculator {
     margin: 0 auto;
     width: 375px;
-    height: 425px;
+/*    height: 425px;*/
     
-    box-shadow: 10px 10px 5px #3f3f3f;
+    box-shadow: 0 0 50px 5px #3f3f3f;
     
     display: flex;
     flex-direction: column;
+    align-content: stretch;
     
-    border: 7px solid black;
+    border: 10px solid black;
 }
 
 .screen {
-    margin: 25px auto;
+/*    margin: 25px auto;*/
     padding: 0 10px;
-    width: 80%;
+/*    width: 80%;*/
     background: #0b0;
     text-align: right;
+    width: 100%;
     
-    box-shadow: inset 6px 6px 1px #040;
+    border-bottom: 1px solid black;
+    
+/*    box-shadow: inset 6px 6px 1px #040;*/
 }
 
 .buttons {
+/*
     margin-top: 1px;
     margin-bottom: 1px;
+*/
+    width: inherit;
     
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    align-content: stretch;
 }
 
 .button {
-    border: 5px solid black;
-    width: 50px;
+    border: 1px solid black;
+    width: inherit;
     
     font-size: 1.2em;
     cursor: pointer;
@@ -59,37 +66,45 @@ h1 {
     justify-content: center;
     align-items: center;
     
-    box-shadow: 1px 1px 1px black;
+/*    box-shadow: 1px 1px 1px black;*/
 }
 
 .number {
     background: #f3f3f3;
+/*
     border-bottom-color: #050505;
     border-right-color: #383838;
     border-top-color: #fbfbfb;
     border-left-color: #e2e2e2;
+*/
 }
 
 .number-pressed {
     background: #5a5a5a;
+/*
     border-bottom-color: #000;
     border-right-color: #000;
     border-top-color: #eaeaea;
     border-left-color: #d1d1d1;
+*/
 }
 
 .operation {
     background: #f00;
+/*
     border-bottom-color: #600;
     border-right-color: #a00;
     border-top-color: #faa;
     border-left-color: #f66;
+*/
 }
 
 .equals {
     background: #dde02e;
+/*
     border-bottom-color: #292a06;
     border-right-color: #9ea118;
     border-top-color: #f7f8d0;
     border-left-color: #e9eb77;
+*/
 }
