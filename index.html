@@ -7,15 +7,15 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
 |                                           |
 |                                           |
 |------------------------------------|
-|   CL   |   +/-   |           |   +   |
+|   CL   |   DEL   |          |   +   |
 |------------------------------------|
 |    7    |    8     |    9     |   --   |
 |------------------------------------|
-|    4    |     5    |    6     |    /   |
+|    4    |     5    |    6     |   X   |
 |------------------------------------|
-|    1    |     2    |    3     |   X   |
+|    1    |     2    |    3     |    /   |
 |------------------------------------|
-|    0    |     .     |  DEL   |   =   |
+|    0    |     .     |   +/-   |   =   |
  ------------------------------------
 
 -->
@@ -39,31 +39,17 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
             <p>0</p>
         </section>
         <section class="buttons">
-            <div class="button number" id="one" data-number="1">
-                <p>1</p>
+            <div class="button operation" id="clear">
+                <p>CL</p>
             </div>
-            <div class="button number" id="two">
-                <p>2</p>
+            <div class="button operation" id="delete">
+                <p>DEL</p>
             </div>
-            <div class="button number" id="three">
-                <p>3</p>
+            <div class="button" id="empty">
+                <p></p>
             </div>
-            <div class="button operation" id="multiply">
-                <p>x</p>
-            </div>
-        </section>
-        <section class="buttons">
-            <div class="button number" id="four">
-                <p>4</p>
-            </div>
-            <div class="button number" id="five">
-                <p>5</p>
-            </div>
-            <div class="button number" id="six">
-                <p>6</p>
-            </div>
-            <div class="button operation" id="divide">
-                <p>/</p>
+            <div class="button operation" id="add">
+                <p>+</p>
             </div>
         </section>
         <section class="buttons">
@@ -77,21 +63,49 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
                 <p>9</p>
             </div>
             <div class="button operation" id="subtract">
-                <p>&#45;</p>
+                <p>-</p>
             </div>
         </section>
         <section class="buttons">
-            <div class="button operation" id="clear">
-                <p>CL</p>
+            <div class="button number" id="four">
+                <p>4</p>
             </div>
+            <div class="button number" id="five">
+                <p>5</p>
+            </div>
+            <div class="button number" id="six">
+                <p>6</p>
+            </div>
+            <div class="button operation" id="multiply">
+                <p>x</p>
+            </div>
+        </section>
+        <section class="buttons">
+            <div class="button number" id="one">
+                <p>1</p>
+            </div>
+            <div class="button number" id="two">
+                <p>2</p>
+            </div>
+            <div class="button number" id="three">
+                <p>3</p>
+            </div>
+            <div class="button operation" id="divide">
+                <p>/</p>
+            </div>
+        </section>
+        <section class="buttons">
             <div class="button number" id="zero">
                 <p>0</p>
             </div>
+            <div class="button operation" id="decimal">
+                <p>.</p>
+            </div>
+            <div class="button operation" id="plus-minus">
+                <p>+/-</p>
+            </div>
             <div class="button operation equals" id="equals">
                 <p>=</p>
-            </div>
-            <div class="button operation" id="add">
-                <p>+</p>
             </div>
         </section>
     </section>

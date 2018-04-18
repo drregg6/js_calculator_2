@@ -1,7 +1,5 @@
 *, *:before, *:after {
-/*    box-sizing: border-box;*/
-    
-/*    border: 2px dotted green;*/
+    box-sizing: border-box;
 }
 
 body {
@@ -18,8 +16,7 @@ h1 {
 
 .calculator {
     margin: 0 auto;
-    width: 375px;
-/*    height: 425px;*/
+    width: 400px;
     
     box-shadow: 0 0 50px 5px #3f3f3f;
     
@@ -31,33 +28,24 @@ h1 {
 }
 
 .screen {
-/*    margin: 25px auto;*/
-    padding: 0 10px;
-/*    width: 80%;*/
+    padding: 0 15px;
     background: #0b0;
     text-align: right;
-    width: 100%;
+    font-size: 1.5em;
     
-    border-bottom: 1px solid black;
-    
-/*    box-shadow: inset 6px 6px 1px #040;*/
+    border-bottom: 5px solid black;
 }
 
 .buttons {
-/*
-    margin-top: 1px;
-    margin-bottom: 1px;
-*/
-    width: inherit;
-    
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-content: stretch;
+    align-items: stretch;
 }
 
 .button {
-    border: 1px solid black;
-    width: inherit;
+    width: 100%;
     
     font-size: 1.2em;
     cursor: pointer;
@@ -65,46 +53,22 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-/*    box-shadow: 1px 1px 1px black;*/
 }
 
 .number {
     background: #f3f3f3;
-/*
-    border-bottom-color: #050505;
-    border-right-color: #383838;
-    border-top-color: #fbfbfb;
-    border-left-color: #e2e2e2;
-*/
 }
-
 .number-pressed {
     background: #5a5a5a;
-/*
-    border-bottom-color: #000;
-    border-right-color: #000;
-    border-top-color: #eaeaea;
-    border-left-color: #d1d1d1;
-*/
 }
 
 .operation {
     background: #f00;
-/*
-    border-bottom-color: #600;
-    border-right-color: #a00;
-    border-top-color: #faa;
-    border-left-color: #f66;
-*/
+}
+.operation-pressed {
+    background: #ff0;
 }
 
 .equals {
     background: #dde02e;
-/*
-    border-bottom-color: #292a06;
-    border-right-color: #9ea118;
-    border-top-color: #f7f8d0;
-    border-left-color: #e9eb77;
-*/
 }
