@@ -85,3 +85,11 @@ h1 {
     border-top-color: #faa;
     border-left-color: #f66;
 }
+
+.equals {
+    background: #dde02e;
+    border-bottom-color: #292a06;
+    border-right-color: #9ea118;
+    border-top-color: #f7f8d0;
+    border-left-color: #e9eb77;
+}
