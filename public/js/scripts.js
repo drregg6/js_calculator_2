@@ -34,10 +34,13 @@ numbers.forEach(function(number) {
     // screen display effect
     number.addEventListener('click', function(ev) {
         let pressedString = this.firstChild.nextSibling;
-        let pressedInt = parseInt(pressedString);
+        let pressedInt = parseInt(pressedString.textContent);
         
         
         if (displayString.textContent === '0') {
+            displayString.textContent = pressedString.textContent;
+            currentNumber = pressedInt;
+        } else if (isAdding || isDividing || isMultiplying || isSubtracting) {
             displayString.textContent = pressedString.textContent;
             currentNumber = pressedInt;
         } else {
@@ -64,18 +67,22 @@ operations.forEach(function(operation) {
 add.addEventListener('click', function(ev) {
     resetFlags();
     isAdding = true;
+    savedNumber = currentNumber;
 });
 subtract.addEventListener('click', function(ev) {
     resetFlags();
     isSubtracting = true;
+    savedNumber = currentNumber;
 });
 multiply.addEventListener('click', function(ev) {
     resetFlags();
     isMultiplying = true;
+    savedNumber = currentNumber;
 });
 divide.addEventListener('click', function(ev) {
     resetFlags();
     isDividing = true;
+    savedNumber = currentNumber;
 });
 equals.addEventListener('click', function(ev) {
     resetFlags();
