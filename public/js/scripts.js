@@ -43,7 +43,7 @@ numbers.forEach(function(number) {
             currentNumber = pressedInt;
         } else if (isOperating) {
             isOperating = false;
-            storedNumber = currentNumber;
+            storedNumber = parseInt(displayString.textContent);
             displayString.textContent = pressedString.textContent;
             currentNumber = pressedInt;
         } else {
