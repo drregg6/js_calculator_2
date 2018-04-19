@@ -26,60 +26,11 @@ let currentNumber = 0;
 window.addEventListener('keydown', function(ev) {
     console.log(ev);
     let keycode = ev.which;
-    let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
+    let buttonPressed = document.querySelector(`.button[data-which="${keycode}"]`);
     
-    switch(keycode) {
-        case 48:
-            console.log('zero!');
-            buttonPressed.classList.add('button-pressed');
-            break;
-        case 49:
-            console.log('one!');
-            break;
-        case 50:
-            console.log('two!');
-            break;
-        case 51:
-            console.log('three!');
-            break;
-        case 52:
-            console.log('four!');
-            break;
-        case 53:
-            console.log('five!');
-            break;
-        case 54:
-            console.log('six!');
-            break;
-        case 55:
-            console.log('seven!');
-            break;
-        case 56:
-            console.log('eight!');
-            break;
-        case 57:
-            console.log('nine!');
-            break;
-        case 43:
-            console.log('plus!');
-            break;
-        case 61:
-            console.log('equals!');
-            break;
-        case 42:
-            console.log('multiply!');
-            break;
-        case 45:
-            console.log('subtract!');
-            break;
-        case 46:
-            console.log('decimal!');
-            break;
-        case 47:
-            console.log('divide!');
-            break;
-        default:
-            console.log('Hello world!');
+    if (buttonPressed !== null) {
+        console.log(buttonPressed);
+        buttonPressed.classList.add('button-pressed');
     }
 });
 window.addEventListener('keyup', function(ev) {
@@ -87,58 +38,8 @@ window.addEventListener('keyup', function(ev) {
     let keycode = ev.which;
     let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
     
-    switch(keycode) {
-        case 48:
-            console.log('zero!');
-            buttonPressed.classList.remove('button-pressed');
-            break;
-        case 49:
-            console.log('one!');
-            break;
-        case 50:
-            console.log('two!');
-            break;
-        case 51:
-            console.log('three!');
-            break;
-        case 52:
-            console.log('four!');
-            break;
-        case 53:
-            console.log('five!');
-            break;
-        case 54:
-            console.log('six!');
-            break;
-        case 55:
-            console.log('seven!');
-            break;
-        case 56:
-            console.log('eight!');
-            break;
-        case 57:
-            console.log('nine!');
-            break;
-        case 43:
-            console.log('plus!');
-            break;
-        case 61:
-            console.log('equals!');
-            break;
-        case 42:
-            console.log('multiply!');
-            break;
-        case 45:
-            console.log('subtract!');
-            break;
-        case 46:
-            console.log('decimal!');
-            break;
-        case 47:
-            console.log('divide!');
-            break;
-        default:
-            console.log('Hello world!');
+    if (buttonPressed !== null) {
+        buttonPressed.classList.remove('button-pressed');
     }
 });
 
@@ -236,19 +137,6 @@ clear.addEventListener('click', function(ev) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function resetFlags() {
     isSubtracting = false;
     isDividing = false;
@@ -269,33 +157,3 @@ function multiplying(a, b) {
 function dividing(a, b) {
     return a / b;
 }
-
-//let zeroButton = document.querySelector('#zero');
-//let oneButton = document.querySelector('#one');
-//let twoButton = document.querySelector('#two');
-//let threeButton = document.querySelector('#three');
-//let fourButton = document.querySelector('#four');
-//let fiveButton = document.querySelector('#five');
-//let sixButton = document.querySelector('#six');
-//let sevenButton = document.querySelector('#seven');
-//let eightButton = document.querySelector('#eight');
-//let nineButton = document.querySelector('#nine');
-
-
-
-//zeroButton.addEventListener('click', ev => console.log('Zero!'));
-//oneButton.addEventListener('click', function(ev) {
-//    let num = parseInt(this.firstChild.nextSibling.innerText);
-//    console.log(ev);
-//    console.log(num);
-//});
-//twoButton.addEventListener('click', ev => {
-//    console.log(ev);
-//});
-//threeButton.addEventListener('click', ev => console.log('Three!'));
-//fourButton.addEventListener('click', ev => console.log('Four!'));
-//fiveButton.addEventListener('click', ev => console.log('Five!'));
-//sixButton.addEventListener('click', ev => console.log('Six!'));
-//sevenButton.addEventListener('click', ev => console.log('Seven!'));
-//eightButton.addEventListener('click', ev => console.log('Eight!'));
-//nineButton.addEventListener('click', ev => console.log('Nine!'));
