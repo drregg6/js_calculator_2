@@ -5,7 +5,8 @@ TODO: implement backspace
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
 TODO: keypress should effect currentNumber and displayScreen
-TODO: 
+TODO: figure out how to get the plus and multiply keypress to work
+            (it doesn't work with the shift + equals and shift + eight)
 
 */
 
