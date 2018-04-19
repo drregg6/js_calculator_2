@@ -23,11 +23,15 @@ let isEqualling = false;
 let storedNumber = 0;
 let currentNumber = 0;
 
+
+
+// listening for keypress on the window
 window.addEventListener('keydown', function(ev) {
     console.log(ev);
     let keycode = ev.which;
     let buttonPressed = document.querySelector(`.button[data-which="${keycode}"]`);
     
+    // if .button exists in the .html, change the css
     if (buttonPressed !== null) {
         console.log(buttonPressed);
         buttonPressed.classList.add('button-pressed');
@@ -38,11 +42,14 @@ window.addEventListener('keyup', function(ev) {
     let keycode = ev.which;
     let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
     
+    // if .button exists in the .html, change the css
     if (buttonPressed !== null) {
         buttonPressed.classList.remove('button-pressed');
     }
 });
 
+
+// pressing each button effects the css
 buttons.forEach(function(button) {
     button.addEventListener('mousedown', function(ev) {
         this.classList.add('button-pressed');
