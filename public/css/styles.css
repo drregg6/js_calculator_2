@@ -7,15 +7,11 @@ body {
     font-family: sans-serif;
     font-size: 16px;
     text-align: center;
-}
-
-h1 {
-    margin: 50px auto;
-    color: purple;
+    color: #212121;
 }
 
 .calculator {
-    margin: 0 auto;
+    margin: 100px auto;
     width: 400px;
     
     box-shadow: 0 0 50px 5px #3f3f3f;
@@ -42,6 +38,11 @@ h1 {
     flex-wrap: nowrap;
     align-content: stretch;
     align-items: stretch;
+    
+    border-bottom: 1px solid #ffff02;
+}
+.buttons:last-child {
+    border-bottom: none;
 }
 
 .button {
@@ -53,22 +54,32 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    border-right: 1px solid #ffff02;
+}
+.button:last-child {
+    border-right: none;
 }
 
 .number {
-    background: #f3f3f3;
-}
-.number-pressed {
-    background: #5a5a5a;
+    color: #f3f3f3;
+    text-shadow: 0 0 1px #3f3f3f;
+    background: #020aff;
 }
 
 .operation {
-    background: #f00;
-}
-.operation-pressed {
-    background: #ff0;
+    background: #ff8102;
 }
 
 .equals {
-    background: #dde02e;
+    background: #fb02ff;
+}
+
+.button-pressed {
+    background: #ffff02;
+}
+
+#empty {
+    background: #f3f3f3;
+    cursor: auto;
 }

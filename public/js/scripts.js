@@ -1,4 +1,5 @@
 // grabbing buttons
+const buttons = document.querySelectorAll('.button');
 const numbers = document.querySelectorAll('.number');
 const add = document.querySelector('#add');
 const subtract = document.querySelector('#subtract');
@@ -22,16 +23,21 @@ let isEqualling = false;
 let storedNumber = 0;
 let currentNumber = 0;
 
+window.addEventListener('keydown', function(ev) {
+    console.log('Hello world!');
+});
+
+buttons.forEach(function(button) {
+    button.addEventListener('mousedown', function(ev) {
+        this.classList.add('button-pressed');
+    });
+    button.addEventListener('mouseup', function(ev) {
+        this.classList.remove('button-pressed');
+    });
+});
 
 
 numbers.forEach(function(number) {
-    // button pressdown effect
-    number.addEventListener('mousedown', function(ev) {
-        this.classList.add('number-pressed');
-    });
-    number.addEventListener('mouseup', function(ev) {
-        this.classList.remove('number-pressed');
-    });
     // screen display effect
     number.addEventListener('click', function(ev) {
         let pressedString = this.firstChild.nextSibling;
