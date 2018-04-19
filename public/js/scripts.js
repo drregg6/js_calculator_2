@@ -24,7 +24,122 @@ let storedNumber = 0;
 let currentNumber = 0;
 
 window.addEventListener('keydown', function(ev) {
-    console.log('Hello world!');
+    console.log(ev);
+    let keycode = ev.which;
+    let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
+    
+    switch(keycode) {
+        case 48:
+            console.log('zero!');
+            buttonPressed.classList.add('button-pressed');
+            break;
+        case 49:
+            console.log('one!');
+            break;
+        case 50:
+            console.log('two!');
+            break;
+        case 51:
+            console.log('three!');
+            break;
+        case 52:
+            console.log('four!');
+            break;
+        case 53:
+            console.log('five!');
+            break;
+        case 54:
+            console.log('six!');
+            break;
+        case 55:
+            console.log('seven!');
+            break;
+        case 56:
+            console.log('eight!');
+            break;
+        case 57:
+            console.log('nine!');
+            break;
+        case 43:
+            console.log('plus!');
+            break;
+        case 61:
+            console.log('equals!');
+            break;
+        case 42:
+            console.log('multiply!');
+            break;
+        case 45:
+            console.log('subtract!');
+            break;
+        case 46:
+            console.log('decimal!');
+            break;
+        case 47:
+            console.log('divide!');
+            break;
+        default:
+            console.log('Hello world!');
+    }
+});
+window.addEventListener('keyup', function(ev) {
+    console.log(ev);
+    let keycode = ev.which;
+    let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
+    
+    switch(keycode) {
+        case 48:
+            console.log('zero!');
+            buttonPressed.classList.remove('button-pressed');
+            break;
+        case 49:
+            console.log('one!');
+            break;
+        case 50:
+            console.log('two!');
+            break;
+        case 51:
+            console.log('three!');
+            break;
+        case 52:
+            console.log('four!');
+            break;
+        case 53:
+            console.log('five!');
+            break;
+        case 54:
+            console.log('six!');
+            break;
+        case 55:
+            console.log('seven!');
+            break;
+        case 56:
+            console.log('eight!');
+            break;
+        case 57:
+            console.log('nine!');
+            break;
+        case 43:
+            console.log('plus!');
+            break;
+        case 61:
+            console.log('equals!');
+            break;
+        case 42:
+            console.log('multiply!');
+            break;
+        case 45:
+            console.log('subtract!');
+            break;
+        case 46:
+            console.log('decimal!');
+            break;
+        case 47:
+            console.log('divide!');
+            break;
+        default:
+            console.log('Hello world!');
+    }
 });
 
 buttons.forEach(function(button) {
