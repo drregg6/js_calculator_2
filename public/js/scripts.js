@@ -1,3 +1,15 @@
+/*
+
+TODO: string operations without having to press the equals button
+TODO: implement backspace
+TODO: implement plus-minus (+/-)
+TODO: implement decimal (.)
+TODO: keypress should effect currentNumber and displayScreen
+TODO: 
+
+*/
+
+
 // grabbing buttons
 const buttons = document.querySelectorAll('.button');
 const numbers = document.querySelectorAll('.number');
