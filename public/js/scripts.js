@@ -1,6 +1,5 @@
 /*
 
-TODO: string operations without having to press the equals button
 TODO: implement backspace
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
@@ -110,24 +109,136 @@ operations.forEach(function(operation) {
 
 */
 add.addEventListener('click', function(ev) {
-    resetFlags();
-    isOperating = true;
-    isAdding = true;
+    if (isOperating) {
+        return;
+    } else if (isAdding) {
+        resetFlags();
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isAdding = true;
+    } else if (isSubtracting) {
+        resetFlags();
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isAdding = true;
+    } else if (isDividing) {
+        resetFlags();
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isAdding = true;
+    } else if (isMultiplying) {
+        resetFlags();
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isAdding = true;
+    } else {
+        resetFlags();
+        isOperating = true;
+        isAdding = true;
+    }
 });
 subtract.addEventListener('click', function(ev) {
-    resetFlags();
-    isOperating = true;
-    isSubtracting = true;
+    if (isOperating) {
+        return;
+    } else if (isSubtracting) {
+        resetFlags();
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isSubtracting = true;
+    } else if (isAdding) {
+        resetFlags();
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isSubtracting = true;
+    } else if (isDividing) {
+        resetFlags();
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isSubtracting = true;
+    } else if (isMultiplying) {
+        resetFlags();
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isSubtracting = true;
+    } else {
+        resetFlags();
+        isOperating = true;
+        isSubtracting = true;
+    }
 });
 multiply.addEventListener('click', function(ev) {
-    resetFlags();
-    isOperating = true;
-    isMultiplying = true;
+    if (isOperating) {
+        return;
+    } else if (isMultiplying) {
+        resetFlags();
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isMultiplying = true;
+    } else if (isSubtracting) {
+        resetFlags();
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isMultiplying = true;
+    } else if (isDividing) {
+        resetFlags();
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isMultiplying = true;
+    } else if (isAdding) {
+        resetFlags();
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isMultiplying = true;
+    } else {
+        resetFlags();
+        isOperating = true;
+        isMultiplying = true;
+    }
 });
 divide.addEventListener('click', function(ev) {
-    resetFlags();
-    isOperating = true;
-    isDividing = true;
+    if (isOperating) {
+        return;
+    } else if (isDividing) {
+        resetFlags();
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isDividing = true;
+    } else if (isSubtracting) {
+        resetFlags();
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isDividing = true;
+    } else if (isAdding) {
+        resetFlags();
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isDividing = true;
+    } else if (isMultiplying) {
+        resetFlags();
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+        isOperating = true;
+        isDividing = true;
+    } else {
+        resetFlags();
+        isOperating = true;
+        isDividing = true;
+    }
 });
 equals.addEventListener('click', function(ev) {
     if (isAdding) {
