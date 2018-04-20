@@ -118,24 +118,28 @@ add.addEventListener('click', function(ev) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isAdding = true;
     } else if (isSubtracting) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isAdding = true;
     } else if (isDividing) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isAdding = true;
     } else if (isMultiplying) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isAdding = true;
     } else {
@@ -151,24 +155,28 @@ subtract.addEventListener('click', function(ev) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isSubtracting = true;
     } else if (isAdding) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isSubtracting = true;
     } else if (isDividing) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isSubtracting = true;
     } else if (isMultiplying) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isSubtracting = true;
     } else {
@@ -184,24 +192,28 @@ multiply.addEventListener('click', function(ev) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isMultiplying = true;
     } else if (isSubtracting) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isMultiplying = true;
     } else if (isDividing) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isMultiplying = true;
     } else if (isAdding) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isMultiplying = true;
     } else {
@@ -217,24 +229,28 @@ divide.addEventListener('click', function(ev) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isDividing = true;
     } else if (isSubtracting) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isDividing = true;
     } else if (isAdding) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isDividing = true;
     } else if (isMultiplying) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
+        currentNumber = 0;
         isOperating = true;
         isDividing = true;
     } else {
