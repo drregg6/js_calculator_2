@@ -1,5 +1,6 @@
 /*
 
+TODO: if statement to limit the length of the digits
 TODO: implement backspace
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
@@ -21,6 +22,7 @@ const divide = document.querySelector('#divide');
 const multiply = document.querySelector('#multiply');
 const equals = document.querySelector('#equals');
 const clear = document.querySelector('#clear');
+const del = document.querySelector('#delete');
 
 const screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
@@ -259,6 +261,23 @@ equals.addEventListener('click', function(ev) {
     resetFlags();
     isEqualling = true;
 });
+
+del.addEventListener('click', function(ev) {
+    console.log('I am deleting!');
+    let displayStringLen = displayString.textContent.length;
+    if (isOperating || isEqualling) {
+        return;
+    } else if (displayStringLen === 1 && isAdding || isSubtracting || isMultiplying || isDividing) {
+        console.log('Hello world!');
+        return;
+    } else if (displayStringLen === 1) {
+        currentNumber = 0;
+        displayString.textContent = '0';
+    } else {
+        displayString.textContent = backspace(displayString.textContent);
+        currentNumber = parseInt(displayString.textContent);
+    }
+});
 clear.addEventListener('click', function(ev) {
     resetFlags();
     isOperating = false;
@@ -269,6 +288,10 @@ clear.addEventListener('click', function(ev) {
 
 
 
+
+function backspace(str) {
+    return str.slice(0,str.length-1);
+}
 
 function resetFlags() {
     isSubtracting = false;
