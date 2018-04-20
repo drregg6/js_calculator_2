@@ -15,14 +15,19 @@ TODO: simplify this shitty code
 // grabbing buttons
 const buttons = document.querySelectorAll('.button');
 const numbers = document.querySelectorAll('.number');
+// operations
 const add = document.querySelector('#add');
 const subtract = document.querySelector('#subtract');
 const divide = document.querySelector('#divide');
 const multiply = document.querySelector('#multiply');
 const equals = document.querySelector('#equals');
+// special keys
 const clear = document.querySelector('#clear');
 const del = document.querySelector('#delete');
+const decimal = document.querySelector('#decimal');
+const plusMinus = document.querySelector('#plus-minus');
 
+// screen
 const screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
@@ -111,6 +116,7 @@ operations.forEach(function(operation) {
 })
 
 */
+// a switch statement might be possible for each eventlistener
 add.addEventListener('click', function(ev) {
     if (isOperating) {
         return;
@@ -277,6 +283,17 @@ equals.addEventListener('click', function(ev) {
     isEqualling = true;
 });
 
+// event listeners for special keys
+decimal.addEventListener('click', function(ev) {
+    if (displayString.textContent.indexOf(".") !== -1) {
+        console.log('ERROR');
+        return;
+    } else {
+        console.log('Hello world!');
+    }
+});
+
+// event listeners for deleting
 del.addEventListener('click', function(ev) {
     console.log('I am deleting!');
     let displayStringLen = displayString.textContent.length;
