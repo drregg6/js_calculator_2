@@ -1,7 +1,6 @@
 /*
 
 TODO: if statement to limit the length of the digits
-TODO: implement backspace
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
 TODO: keypress should effect currentNumber and displayScreen
@@ -265,9 +264,10 @@ equals.addEventListener('click', function(ev) {
 del.addEventListener('click', function(ev) {
     console.log('I am deleting!');
     let displayStringLen = displayString.textContent.length;
+    
     if (isOperating || isEqualling) {
         return;
-    } else if (displayStringLen === 1 && isAdding || isSubtracting || isMultiplying || isDividing) {
+    } else if (displayStringLen === 1 && (isAdding || isSubtracting || isMultiplying || isDividing)) {
         console.log('Hello world!');
         return;
     } else if (displayStringLen === 1) {
