@@ -267,9 +267,6 @@ del.addEventListener('click', function(ev) {
     
     if (isOperating || isEqualling) {
         return;
-    } else if (displayStringLen === 1 && (isAdding || isSubtracting || isMultiplying || isDividing)) {
-        console.log('Hello world!');
-        return;
     } else if (displayStringLen === 1) {
         currentNumber = 0;
         displayString.textContent = '0';
