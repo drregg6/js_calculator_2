@@ -146,6 +146,8 @@ function updateCurrentNumber(buttonPressed) {
     } else if (displayString.textContent === '0') {
         displayString.textContent = pressedString.textContent;
         currentNumber = pressedInt;
+        // THIS IS WHERE EVERYTHING FUCKS UP
+        // I NEED TO RESET THIS FLAG WITH SOMETHING ELSE
     } else if (isOperating) {
         isOperating = false;
         storedNumber = parseInt(displayString.textContent);
@@ -155,6 +157,10 @@ function updateCurrentNumber(buttonPressed) {
         currentNumber = parseInt(displayString.textContent + pressedString.textContent);
         displayString.textContent = displayString.textContent + pressedString.textContent;
     }
+    
+    console.log({
+        isOperating: isOperating
+    });
 }
 
 function pressingDown(ev) {
@@ -222,7 +228,6 @@ function clickOperation(ev) {
     if (!isOperating) {
         operate();
     }
-
     resetFlags();
     isOperating = true;
     switch(ev.target.id) {
@@ -242,7 +247,10 @@ function clickOperation(ev) {
             console.log('dividing');
             isDividing = true;
             break;
-        }
+    }
+    
+
+    
 
     console.log({
         isOperating: isOperating,
