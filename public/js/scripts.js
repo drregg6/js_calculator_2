@@ -82,7 +82,7 @@ numbers.forEach(function(number) {
         let pressedString = this.firstChild.nextSibling;
         let pressedInt = parseInt(pressedString.textContent);
         
-        if (displayString.textContent.length === 20) {
+        if (displayString.textContent.length === 18) {
             return;
         } else if (displayString.textContent === '0') {
             displayString.textContent = pressedString.textContent;
@@ -96,6 +96,9 @@ numbers.forEach(function(number) {
             currentNumber = parseInt(displayString.textContent + pressedString.textContent);
             displayString.textContent = displayString.textContent + pressedString.textContent;
         }
+        
+        console.log(currentNumber);
+        console.log(displayString.textContent.length);
     });
 });
 
@@ -314,10 +317,10 @@ clear.addEventListener('click', function(ev) {
 });
 
 
-function pressingDown(event) {
+function pressingDown(ev) {
     this.classList.add('button-pressed');
 }
-function pressingUp(event) {
+function pressingUp(ev) {
     this.classList.remove('button-pressed');
 }
 
