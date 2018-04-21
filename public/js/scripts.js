@@ -1,6 +1,7 @@
 /*
 
-TODO: if statement to limit the length of the digits
+<strike>TODO: if statement to limit the length of the digits</strike>
+TODO: limit the length of digits when a value is operated
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
 TODO: keypress should effect currentNumber and displayScreen
@@ -15,6 +16,7 @@ TODO: simplify this shitty code
 // grabbing buttons
 const buttons = document.querySelectorAll('.button');
 const numbers = document.querySelectorAll('.number');
+const operations = document.querySelectorAll('.operation');
 // operations
 const add = document.querySelector('#add');
 const subtract = document.querySelector('#subtract');
@@ -54,6 +56,7 @@ window.addEventListener('keydown', function(ev) {
     // if .button exists in the .html, change the css
     if (buttonPressed !== null) {
         console.log(buttonPressed);
+        updateCurrentNumber(buttonPressed);
         buttonPressed.classList.add('button-pressed');
     }
 });
@@ -75,31 +78,8 @@ buttons.forEach(function(button) {
     button.addEventListener('mouseup', pressingUp, false);
 });
 
-
 numbers.forEach(function(number) {
-    // screen display effect
-    number.addEventListener('click', function(ev) {
-        let pressedString = this.firstChild.nextSibling;
-        let pressedInt = parseInt(pressedString.textContent);
-        
-        if (displayString.textContent.length === 18) {
-            return;
-        } else if (displayString.textContent === '0') {
-            displayString.textContent = pressedString.textContent;
-            currentNumber = pressedInt;
-        } else if (isOperating) {
-            isOperating = false;
-            storedNumber = parseInt(displayString.textContent);
-            displayString.textContent = pressedString.textContent;
-            currentNumber = pressedInt;
-        } else {
-            currentNumber = parseInt(displayString.textContent + pressedString.textContent);
-            displayString.textContent = displayString.textContent + pressedString.textContent;
-        }
-        
-        console.log(currentNumber);
-        console.log(displayString.textContent.length);
-    });
+    number.addEventListener('click', updateCurrentNumber, false);
 });
 
 
@@ -229,6 +209,9 @@ multiply.addEventListener('click', function(ev) {
     }
 });
 divide.addEventListener('click', function(ev) {
+    if (ev.target.id === 'divide') {
+        console.log('ev.target.id');
+    }
     if (isOperating) {
         return;
     } else if (isDividing) {
@@ -317,6 +300,26 @@ clear.addEventListener('click', function(ev) {
 });
 
 
+function updateCurrentNumber(buttonPressed) {
+    let pressedString = this.firstChild.nextSibling;
+    let pressedInt = parseInt(pressedString.textContent);
+
+    if (displayString.textContent.length === 18) {
+        return;
+    } else if (displayString.textContent === '0') {
+        displayString.textContent = pressedString.textContent;
+        currentNumber = pressedInt;
+    } else if (isOperating) {
+        isOperating = false;
+        storedNumber = parseInt(displayString.textContent);
+        displayString.textContent = pressedString.textContent;
+        currentNumber = pressedInt;
+    } else {
+        currentNumber = parseInt(displayString.textContent + pressedString.textContent);
+        displayString.textContent = displayString.textContent + pressedString.textContent;
+    }
+}
+
 function pressingDown(ev) {
     this.classList.add('button-pressed');
 }
@@ -337,22 +340,33 @@ function resetFlags() {
 }
 
 function adding(a, b) {
+//    let answer = a + b;
+//    if (answer.toString().length > 18) {
+//        return;
+//    } else {
+//        return answer;
+//    }
     return a + b;
 }
 function subtracting(a, b) {
     return a - b;
 }
 function multiplying(a, b) {
+//    let answer = a * b;
+//    if (answer.toString().length > 18) {
+//        return;
+//    } else {
+//        return answer;
+//    }
     return a * b;
 }
 function dividing(a, b) {
     return a / b;
 }
 
-//buttons.forEach(function(button) {
-//    button.addEventListener('click', testing, false);
-//});
-//
-//function testing(event) {
-//    console.log(this);
-//}
+
+operations.forEach(function(operation) {
+    operation.addEventListener('click', function(event) {
+        console.log(this);
+    });
+});
