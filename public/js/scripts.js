@@ -71,12 +71,8 @@ window.addEventListener('keyup', function(ev) {
 
 // pressing each button effects the css
 buttons.forEach(function(button) {
-    button.addEventListener('mousedown', function(ev) {
-        this.classList.add('button-pressed');
-    });
-    button.addEventListener('mouseup', function(ev) {
-        this.classList.remove('button-pressed');
-    });
+    button.addEventListener('mousedown', pressingDown, false);
+    button.addEventListener('mouseup', pressingUp, false);
 });
 
 
@@ -86,8 +82,9 @@ numbers.forEach(function(number) {
         let pressedString = this.firstChild.nextSibling;
         let pressedInt = parseInt(pressedString.textContent);
         
-        
-        if (displayString.textContent === '0') {
+        if (displayString.textContent.length === 20) {
+            return;
+        } else if (displayString.textContent === '0') {
             displayString.textContent = pressedString.textContent;
             currentNumber = pressedInt;
         } else if (isOperating) {
@@ -317,7 +314,12 @@ clear.addEventListener('click', function(ev) {
 });
 
 
-
+function pressingDown(event) {
+    this.classList.add('button-pressed');
+}
+function pressingUp(event) {
+    this.classList.remove('button-pressed');
+}
 
 function backspace(str) {
     return str.slice(0,str.length-1);
@@ -343,3 +345,11 @@ function multiplying(a, b) {
 function dividing(a, b) {
     return a / b;
 }
+
+//buttons.forEach(function(button) {
+//    button.addEventListener('click', testing, false);
+//});
+//
+//function testing(event) {
+//    console.log(this);
+//}
