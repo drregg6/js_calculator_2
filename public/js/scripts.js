@@ -46,32 +46,6 @@ let storedNumber = 0;
 let currentNumber = 0;
 
 
-
-// listening for keypress on the window
-window.addEventListener('keydown', function(ev) {
-    console.log(ev);
-    let keycode = ev.which;
-    let buttonPressed = document.querySelector(`.button[data-which="${keycode}"]`);
-    
-    // if .button exists in the .html, change the css
-    if (buttonPressed !== null) {
-        console.log(buttonPressed);
-        updateCurrentNumber(buttonPressed);
-        buttonPressed.classList.add('button-pressed');
-    }
-});
-window.addEventListener('keyup', function(ev) {
-    console.log(ev);
-    let keycode = ev.which;
-    let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
-    
-    // if .button exists in the .html, change the css
-    if (buttonPressed !== null) {
-        buttonPressed.classList.remove('button-pressed');
-    }
-});
-
-
 // pressing each button effects the css
 buttons.forEach(function(button) {
     button.addEventListener('mousedown', pressingDown, false);
@@ -81,6 +55,8 @@ buttons.forEach(function(button) {
 numbers.forEach(function(number) {
     number.addEventListener('click', updateCurrentNumber, false);
 });
+
+clear.addEventListener('click', resetCalculator);
 
 
 
@@ -128,12 +104,29 @@ del.addEventListener('click', function(ev) {
         currentNumber = parseInt(displayString.textContent);
     }
 });
-clear.addEventListener('click', function(ev) {
-    resetFlags();
-    isOperating = false;
-    storedNumber = 0;
-    currentNumber = 0;
-    displayString.textContent = '0';
+
+// listening for keypress on the window
+window.addEventListener('keydown', function(ev) {
+    console.log(ev);
+    let keycode = ev.which;
+    let buttonPressed = document.querySelector(`.button[data-which="${keycode}"]`);
+    
+    // if .button exists in the .html, change the css
+    if (buttonPressed !== null) {
+        console.log(buttonPressed);
+        updateCurrentNumber(buttonPressed);
+        buttonPressed.classList.add('button-pressed');
+    }
+});
+window.addEventListener('keyup', function(ev) {
+    console.log(ev);
+    let keycode = ev.which;
+    let buttonPressed = document.querySelector(`.button[data-which="${ev.which}"]`);
+    
+    // if .button exists in the .html, change the css
+    if (buttonPressed !== null) {
+        buttonPressed.classList.remove('button-pressed');
+    }
 });
 
 
@@ -143,14 +136,7 @@ function updateCurrentNumber(buttonPressed) {
 
     if (displayString.textContent.length === 18) {
         return;
-    } else if (displayString.textContent === '0') {
-        displayString.textContent = pressedString.textContent;
-        currentNumber = pressedInt;
-        // THIS IS WHERE EVERYTHING FUCKS UP
-        // I NEED TO RESET THIS FLAG WITH SOMETHING ELSE
-    } else if (isOperating) {
-        isOperating = false;
-        storedNumber = parseInt(displayString.textContent);
+    } else if (currentNumber === 0) {
         displayString.textContent = pressedString.textContent;
         currentNumber = pressedInt;
     } else {
@@ -159,7 +145,9 @@ function updateCurrentNumber(buttonPressed) {
     }
     
     console.log({
-        isOperating: isOperating
+        isOperating: isOperating,
+        storedNumber: storedNumber,
+        currentNumber: currentNumber
     });
 }
 
@@ -174,36 +162,20 @@ function backspace(str) {
     return str.slice(0,str.length-1);
 }
 
+function resetCalculator() {
+    resetFlags();
+    isOperating = false;
+    storedNumber = 0;
+    currentNumber = 0;
+    displayString.textContent = '0';
+}
+
 function resetFlags() {
     isSubtracting = false;
     isDividing = false;
     isAdding = false;
     isMultiplying = false;
     isEqualling = false;
-}
-
-function operate() {
-    if (isDividing) {
-        resetFlags();
-        storedNumber = dividing(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
-        currentNumber = 0;
-    } else if (isSubtracting) {
-        resetFlags();
-        storedNumber = subtracting(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
-        currentNumber = 0;
-    } else if (isAdding) {
-        resetFlags();
-        storedNumber = adding(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
-        currentNumber = 0;
-    } else if (isMultiplying) {
-        resetFlags();
-        storedNumber = multiplying(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
-        currentNumber = 0;
-    }
 }
 
 function adding(a, b) {
@@ -228,6 +200,10 @@ function clickOperation(ev) {
     if (!isOperating) {
         operate();
     }
+    let storage = currentNumber;
+    storedNumber = storage;
+    currentNumber = 0;
+    
     resetFlags();
     isOperating = true;
     switch(ev.target.id) {
@@ -248,10 +224,12 @@ function clickOperation(ev) {
             isDividing = true;
             break;
     }
-    
 
+    console.log({
+        currentNumber: currentNumber,
+        storedNumber: storedNumber
+    });
     
-
     console.log({
         isOperating: isOperating,
         isAdding: isAdding,
@@ -259,4 +237,24 @@ function clickOperation(ev) {
         isMultiplying: isMultiplying,
         isDividing: isDividing
     });
+}
+
+
+
+function operate() {
+    if (isDividing) {
+        storedNumber = dividing(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isSubtracting) {
+        storedNumber = subtracting(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isAdding) {
+        storedNumber = adding(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    } else if (isMultiplying) {
+        storedNumber = multiplying(storedNumber, currentNumber);
+        displayString.textContent = "" + storedNumber;
+    }
+    resetFlags();
+    currentNumber = 0;
 }
