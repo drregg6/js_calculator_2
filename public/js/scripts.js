@@ -98,41 +98,29 @@ operations.forEach(function(operation) {
 */
 // a switch statement might be possible for each eventlistener
 add.addEventListener('click', function(ev) {
-    if (isOperating) {
-        return;
-    } else if (isAdding) {
+    if (isAdding && !isOperating) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isAdding = true;
-    } else if (isSubtracting) {
+    } else if (isSubtracting && !isOperating) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isAdding = true;
-    } else if (isDividing) {
+    } else if (isDividing && !isOperating) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isAdding = true;
-    } else if (isMultiplying) {
+    } else if (isMultiplying && !isOperating) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isAdding = true;
-    } else {
-        resetFlags();
-        isOperating = true;
-        isAdding = true;
     }
+    isOperating = true;
+    isAdding = true;
 });
 subtract.addEventListener('click', function(ev) {
     if (isOperating) {
@@ -142,111 +130,83 @@ subtract.addEventListener('click', function(ev) {
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isSubtracting = true;
     } else if (isAdding) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isSubtracting = true;
     } else if (isDividing) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isSubtracting = true;
     } else if (isMultiplying) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isSubtracting = true;
-    } else {
-        resetFlags();
-        isOperating = true;
-        isSubtracting = true;
     }
+    resetFlags();
+    isOperating = true;
+    isSubtracting = true;
 });
 multiply.addEventListener('click', function(ev) {
-    if (isOperating) {
-        return;
-    } else if (isMultiplying) {
+    if (isMultiplying && !isOperating) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isMultiplying = true;
-    } else if (isSubtracting) {
+    } else if (isSubtracting && !isOperating) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isMultiplying = true;
-    } else if (isDividing) {
+    } else if (isDividing && !isOperating) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isMultiplying = true;
-    } else if (isAdding) {
+    } else if (isAdding && !isOperating) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isMultiplying = true;
-    } else {
-        resetFlags();
-        isOperating = true;
-        isMultiplying = true;
     }
+    resetFlags();
+    isOperating = true;
+    isMultiplying = true;
 });
 divide.addEventListener('click', function(ev) {
     if (ev.target.id === 'divide') {
-        console.log('ev.target.id');
+        console.log('hello world!');
     }
     if (isOperating) {
+        resetFlags();
         return;
     } else if (isDividing) {
         resetFlags();
         storedNumber = dividing(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isDividing = true;
     } else if (isSubtracting) {
         resetFlags();
         storedNumber = subtracting(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isDividing = true;
     } else if (isAdding) {
         resetFlags();
         storedNumber = adding(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isDividing = true;
     } else if (isMultiplying) {
         resetFlags();
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
         currentNumber = 0;
-        isOperating = true;
-        isDividing = true;
-    } else {
-        resetFlags();
-        isOperating = true;
-        isDividing = true;
     }
+    resetFlags();
+    isOperating = true;
+    isDividing = true;
 });
 equals.addEventListener('click', function(ev) {
     if (isAdding) {
@@ -367,6 +327,12 @@ function dividing(a, b) {
 
 operations.forEach(function(operation) {
     operation.addEventListener('click', function(event) {
-        console.log(this);
+        console.log({
+            isOperating: isOperating,
+            isAdding: isAdding,
+            isSubtracting: isSubtracting,
+            isMultiplying: isMultiplying,
+            isDividing: isDividing
+        })
     });
 });
