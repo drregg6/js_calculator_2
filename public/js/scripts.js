@@ -1,9 +1,5 @@
 /*
 
-stringing operations is fucking BUGGING me!
-take a break from it, implement plusMinus and decimal
-go back to operations
-
 TODO: limit the length of digits when a value is operated
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
@@ -35,7 +31,6 @@ const screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
 // operations flags
-let isOperating = false; // once true, the isOperating string is incomplete until EQUALS or CLEAR is clicked
 let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
@@ -55,6 +50,10 @@ buttons.forEach(function(button) {
 
 numbers.forEach(function(number) {
     number.addEventListener('click', updateCurrentNumber, false);
+});
+
+operations.forEach(function(operation) {
+    operation.addEventListener('click', clickOperation, false);
 });
 
 clear.addEventListener('click', resetCalculator);
@@ -78,7 +77,6 @@ equals.addEventListener('click', function(ev) {
     }
     resetFlags();
     isEqualing = true;
-    isOperating = false;
 });
 
 // event listeners for special keys
@@ -93,17 +91,14 @@ decimal.addEventListener('click', function(ev) {
 
 // event listeners for deleting
 del.addEventListener('click', function(ev) {
-    console.log('I am deleting!');
     let displayStringLen = displayString.textContent.length;
     
-    if (isOperating || isEqualing) {
-        return;
-    } else if (displayStringLen === 1) {
+    if (displayStringLen === 1) {
         currentNumber = 0;
-        displayString.textContent = '0';
+        displayString.textContent = currentNumber.toString();
     } else {
-        displayString.textContent = backspace(displayString.textContent);
-        currentNumber = parseInt(displayString.textContent);
+        currentNumber = backspace(displayString.textContent);
+        displayString.textContent = "" + currentNumber;
     }
 });
 
@@ -147,7 +142,6 @@ function updateCurrentNumber(buttonPressed) {
     }
     
     console.log({
-        isOperating: isOperating,
         storedNumber: storedNumber,
         currentNumber: currentNumber
     });
@@ -166,10 +160,9 @@ function backspace(str) {
 
 function resetCalculator() {
     resetFlags();
-    isOperating = false;
     storedNumber = 0;
     currentNumber = 0;
-    displayString.textContent = '0';
+    displayString.textContent = currentNumber.toString();
 }
 
 function resetFlags() {
@@ -193,17 +186,8 @@ function dividing(a, b) {
     return a / b;
 }
 
-
-operations.forEach(function(operation) {
-    operation.addEventListener('click', clickOperation, false);
-});
-
 // operation flags will reset and one will not turn on
 function clickOperation(ev) {
-    
-    // BUG
-    // if the <p> tag is hit directly, the ev.target.id will NOT recognize!
-    console.log(ev);
     
     if (storedNumber === 0) { // beginning an operation
         storedNumber = currentNumber;
@@ -211,54 +195,37 @@ function clickOperation(ev) {
     } else { // continuing an operation
         operate();
     }
-
-//    resetFlags();
+    
+    // wave a flag
     switch(ev.target.id) {
             case 'add':
-                console.log('adding');
                 isAdding = true;
                 break;
             case 'subtract':
-                console.log('subtracting');
                 isSubtracting = true;
                 break;
             case 'multiply':
-                console.log('multiplying');
                 isMultiplying = true;
                 break;
             case 'divide':
-                console.log('dividing');
                 isDividing = true;
                 break;
     }
-    
-    console.log({
-        currentNumber: currentNumber,
-        storedNumber: storedNumber
-    });
-    
-    console.log({
-        isOperating: isOperating,
-        isAdding: isAdding,
-        isSubtracting: isSubtracting,
-        isMultiplying: isMultiplying,
-        isDividing: isDividing
-    });
 }
 
-
-
 function operate() {
-    if (isDividing) {
-        storedNumber = dividing(storedNumber, currentNumber);
-    } else if (isSubtracting) {
-        storedNumber = subtracting(storedNumber, currentNumber);
-    } else if (isAdding) {
-        storedNumber = adding(storedNumber, currentNumber);
-    } else if (isMultiplying) {
-        storedNumber = multiplying(storedNumber, currentNumber);
+    if (currentNumber !== 0) {
+        if (isDividing) {
+            storedNumber = dividing(storedNumber, currentNumber);
+        } else if (isSubtracting) {
+            storedNumber = subtracting(storedNumber, currentNumber);
+        } else if (isAdding) {
+            storedNumber = adding(storedNumber, currentNumber);
+        } else if (isMultiplying) {
+            storedNumber = multiplying(storedNumber, currentNumber);
+        }
     }
-    resetFlags();
+    resetFlags(); // flags restored as clickevent continues
     displayString.textContent = "" + storedNumber;
     currentNumber = 0;
 }
