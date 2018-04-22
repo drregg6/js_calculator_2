@@ -76,27 +76,15 @@ del.addEventListener('click', backspace);
 clear.addEventListener('click', resetCalculator); // clearing
 
 // event listeners for special keys
+plusMinus.addEventListener('click', posToNeg);
 decimal.addEventListener('click', function(ev) {
     if (displayString.textContent.indexOf(".") !== -1) {
-        console.log('ERROR');
         return;
+    } else if (currentNumber === 0) {
+        displayString.textContent = '0.';
     } else {
-        console.log('Hello world!');
+        displayString.textContent = displayString.textContent + '.';
     }
-});
-plusMinus.addEventListener('click', function(ev) {
-    // a result cannot be 
-    if (storedNumber !== 0 && currentNumber === 0) {
-        return;
-    } else if (currentNumber > 0 || currentNumber < 0) {
-        currentNumber = currentNumber * -1;
-        displayString.textContent = "" + currentNumber;
-    }
-    
-    console.log({
-        currentNumber: currentNumber,
-        storedNumber: storedNumber
-    })
 });
 
 // listening for keypress on the window
@@ -128,8 +116,9 @@ window.addEventListener('keyup', function(ev) {
 // event listener methods
 
 function updateCurrentNumber(buttonPressed) { // this can probably be broken apart somewhere
+    let displayStringLen = displayString.textContent.length;
     let pressedString = this.firstChild.nextSibling;
-    let pressedInt = parseInt(pressedString.textContent);
+    let pressedInt = parseFloat(pressedString.textContent);
 
     if (displayString.textContent.length === 18) {
         return;
@@ -141,8 +130,11 @@ function updateCurrentNumber(buttonPressed) { // this can probably be broken apa
     } else if (currentNumber === 0) {
         displayString.textContent = pressedString.textContent;
         currentNumber = pressedInt;
+//    } else if (displayString.textContent.charAt(displayStringLen-1) === '.') {
+//        displayString.textContent = displayString.textContent + pressedString.textContent;
+//        currentNumber = Number(displayString.textContent);
     } else {
-        currentNumber = parseInt(displayString.textContent + pressedString.textContent);
+        currentNumber = parseFloat(displayString.textContent + pressedString.textContent);
         displayString.textContent = displayString.textContent + pressedString.textContent;
     }
     
@@ -181,6 +173,21 @@ function clickOperation(ev) {
 function equaling(ev) {
     operate();
     isEqualing = true;
+}
+
+function posToNeg() {
+    // a result cannot be 
+    if (storedNumber !== 0 && currentNumber === 0 || isEqualing) {
+        return;
+    } else if (currentNumber > 0 || currentNumber < 0) {
+        currentNumber = currentNumber * -1;
+        displayString.textContent = "" + currentNumber;
+    }
+    
+    console.log({
+        currentNumber: currentNumber,
+        storedNumber: storedNumber
+    })
 }
 
 function pressingDown(ev) {
