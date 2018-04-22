@@ -34,7 +34,7 @@ const screen = document.querySelector('.screen');
 let displayString = screen.firstChild.nextSibling;
 
 // operations flags
-let isOperating = false;
+let isOperating = false; // once true, the isOperating string is incomplete until EQUALS or CLEAR is clicked
 let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
@@ -77,6 +77,7 @@ equals.addEventListener('click', function(ev) {
     }
     resetFlags();
     isEqualling = true;
+    isOperating = false;
 });
 
 // event listeners for special keys
@@ -197,12 +198,14 @@ operations.forEach(function(operation) {
 });
 
 function clickOperation(ev) {
+    
+    // flags are resetting to false at some point
     if (!isOperating) {
+        storedNumber = currentNumber;
+        currentNumber = 0;
+    } else {
         operate();
     }
-    let storage = currentNumber;
-    storedNumber = storage;
-    currentNumber = 0;
     
     resetFlags();
     isOperating = true;
