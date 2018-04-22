@@ -198,7 +198,12 @@ operations.forEach(function(operation) {
     operation.addEventListener('click', clickOperation, false);
 });
 
+// operation flags will reset and one will not turn on
 function clickOperation(ev) {
+    
+    // BUG
+    // if the <p> tag is hit directly, the ev.target.id will NOT recognize!
+    console.log(ev);
     
     if (storedNumber === 0) { // beginning an operation
         storedNumber = currentNumber;
