@@ -56,9 +56,21 @@ numbers.forEach(function(number) { // updating data and display
 
 operations.forEach(function(operation) { // performing operations
     operation.addEventListener('click', clickOperation, false);
+    operation.addEventListener('click', function() {
+        console.log({
+            currentNumber: currentNumber,
+            storedNumber: storedNumber
+        })
+    })
 });
 
 equals.addEventListener('click', equaling);
+equals.addEventListener('click', function(){
+    console.log({
+            currentNumber: currentNumber,
+            storedNumber: storedNumber
+        })
+})
 // event listeners for deleting
 del.addEventListener('click', backspace);
 clear.addEventListener('click', resetCalculator); // clearing
@@ -73,13 +85,18 @@ decimal.addEventListener('click', function(ev) {
     }
 });
 plusMinus.addEventListener('click', function(ev) {
-    if (isEqualing) {
-        storedNumber = -1 * storedNumber;
-        displayString.textContent = "" + storedNumber;
+    // a result cannot be 
+    if (storedNumber !== 0 && currentNumber === 0) {
+        return;
     } else if (currentNumber > 0 || currentNumber < 0) {
-        currentNumber = -1 * currentNumber;
+        currentNumber = currentNumber * -1;
         displayString.textContent = "" + currentNumber;
     }
+    
+    console.log({
+        currentNumber: currentNumber,
+        storedNumber: storedNumber
+    })
 });
 
 // listening for keypress on the window
