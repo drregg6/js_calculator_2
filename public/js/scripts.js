@@ -1,14 +1,15 @@
 /*
 
-<strike>TODO: if statement to limit the length of the digits</strike>
+stringing operations is fucking BUGGING me!
+take a break from it, implement plusMinus and decimal
+go back to operations
+
 TODO: limit the length of digits when a value is operated
 TODO: implement plus-minus (+/-)
 TODO: implement decimal (.)
 TODO: keypress should effect currentNumber and displayScreen
 TODO: figure out how to get the plus and multiply keypress to work
             (it doesn't work with the shift + equals and shift + eight)
-            
-TODO: simplify this shitty code
 
 */
 
@@ -199,35 +200,33 @@ operations.forEach(function(operation) {
 
 function clickOperation(ev) {
     
-    // flags are resetting to false at some point
-    if (isOperating === false) {
+    if (storedNumber === 0) { // beginning an operation
         storedNumber = currentNumber;
         currentNumber = 0;
-        isOperating = true;
-    } else {
+    } else { // continuing an operation
         operate();
     }
-    
-    resetFlags();
-    switch(ev.target.id) {
-        case 'add':
-            console.log('adding');
-            isAdding = true;
-            break;
-        case 'subtract':
-            console.log('subtracting');
-            isSubtracting = true;
-            break;
-        case 'multiply':
-            console.log('multiplying');
-            isMultiplying = true;
-            break;
-        case 'divide':
-            console.log('dividing');
-            isDividing = true;
-            break;
-    }
 
+//    resetFlags();
+    switch(ev.target.id) {
+            case 'add':
+                console.log('adding');
+                isAdding = true;
+                break;
+            case 'subtract':
+                console.log('subtracting');
+                isSubtracting = true;
+                break;
+            case 'multiply':
+                console.log('multiplying');
+                isMultiplying = true;
+                break;
+            case 'divide':
+                console.log('dividing');
+                isDividing = true;
+                break;
+    }
+    
     console.log({
         currentNumber: currentNumber,
         storedNumber: storedNumber
@@ -254,6 +253,7 @@ function operate() {
     } else if (isMultiplying) {
         storedNumber = multiplying(storedNumber, currentNumber);
     }
+    resetFlags();
     displayString.textContent = "" + storedNumber;
     currentNumber = 0;
 }
