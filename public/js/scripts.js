@@ -42,6 +42,7 @@ let storedNumber = 0;
 let currentNumber = 0;
 
 
+
 // event listeners
 
 buttons.forEach(function(button) { // changing the css
@@ -58,6 +59,8 @@ operations.forEach(function(operation) { // performing operations
 });
 
 equals.addEventListener('click', equaling);
+// event listeners for deleting
+del.addEventListener('click', backspace);
 clear.addEventListener('click', resetCalculator); // clearing
 
 // event listeners for special keys
@@ -69,16 +72,12 @@ decimal.addEventListener('click', function(ev) {
         console.log('Hello world!');
     }
 });
-
-// event listeners for deleting
-del.addEventListener('click', function(ev) {
-    let displayStringLen = displayString.textContent.length;
-    
-    if (displayStringLen === 1) {
-        currentNumber = 0;
-        displayString.textContent = currentNumber.toString();
-    } else {
-        currentNumber = backspace(displayString.textContent);
+plusMinus.addEventListener('click', function(ev) {
+    if (isEqualing) {
+        storedNumber = -1 * storedNumber;
+        displayString.textContent = "" + storedNumber;
+    } else if (currentNumber > 0 || currentNumber < 0) {
+        currentNumber = -1 * currentNumber;
         displayString.textContent = "" + currentNumber;
     }
 });
@@ -111,7 +110,7 @@ window.addEventListener('keyup', function(ev) {
 
 // event listener methods
 
-function updateCurrentNumber(buttonPressed) {
+function updateCurrentNumber(buttonPressed) { // this can probably be broken apart somewhere
     let pressedString = this.firstChild.nextSibling;
     let pressedInt = parseInt(pressedString.textContent);
 
@@ -172,6 +171,18 @@ function pressingDown(ev) {
 }
 function pressingUp(ev) {
     this.classList.remove('button-pressed');
+}
+
+function backspace() {
+    let displayStringLen = displayString.textContent.length;
+    
+    if (displayStringLen === 1) {
+        currentNumber = 0;
+        displayString.textContent = currentNumber.toString();
+    } else {
+        currentNumber = backspace(displayString.textContent);
+        displayString.textContent = "" + currentNumber;
+    }
 }
 
 function resetCalculator() {
