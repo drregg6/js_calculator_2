@@ -57,22 +57,8 @@ operations.forEach(function(operation) { // performing operations
     operation.addEventListener('click', clickOperation, false);
 });
 
+equals.addEventListener('click', equaling);
 clear.addEventListener('click', resetCalculator); // clearing
-
-equals.addEventListener('click', function(ev) {
-    if (isAdding) {
-        storedNumber = adding(storedNumber, currentNumber);
-    } else if (isSubtracting) {
-        storedNumber = subtracting(storedNumber, currentNumber);
-    } else if (isMultiplying) {
-        storedNumber = multiplying(storedNumber, currentNumber);
-    } else if (isDividing) {
-        storedNumber = dividing(storedNumber, currentNumber);
-    }
-    displayString.textContent = "" + storedNumber;
-    resetFlags();
-    isEqualing = true;
-});
 
 // event listeners for special keys
 decimal.addEventListener('click', function(ev) {
@@ -154,10 +140,10 @@ function clickOperation(ev) {
     
     if (storedNumber === 0) { // beginning an operation
         storedNumber = currentNumber;
-        currentNumber = 0;
     } else { // continuing an operation
         operate();
     }
+    currentNumber = 0;
     
     // wave a flag
     switch(ev.target.id) {
@@ -174,6 +160,11 @@ function clickOperation(ev) {
                 isDividing = true;
                 break;
     }
+}
+
+function equaling(ev) {
+    operate();
+    isEqualing = true;
 }
 
 function pressingDown(ev) {
@@ -212,7 +203,6 @@ function operate() {
     }
     resetFlags(); // flags restored as clickevent continues
     displayString.textContent = "" + storedNumber;
-    currentNumber = 0;
 }
 
 function adding(a, b) {
