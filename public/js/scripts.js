@@ -1,11 +1,12 @@
 /*
 
 TODO: limit the length of digits when a value is operated
-TODO: implement plus-minus (+/-)
-TODO: implement decimal (.)
+TODO: implement decimal (.) --> map out how it should work
 TODO: keypress should effect currentNumber and displayScreen
 TODO: figure out how to get the plus and multiply keypress to work
             (it doesn't work with the shift + equals and shift + eight)
+TODO: code can be cleaned
+TODO: send helpers into a new file
 
 */
 
@@ -20,6 +21,7 @@ const subtract = document.querySelector('#subtract');
 const divide = document.querySelector('#divide');
 const multiply = document.querySelector('#multiply');
 const equals = document.querySelector('#equals');
+const empty = document.querySelector('#empty');
 // special keys
 const clear = document.querySelector('#clear');
 const del = document.querySelector('#delete');
@@ -56,16 +58,16 @@ numbers.forEach(function(number) { // updating data and display
 
 operations.forEach(function(operation) { // performing operations
     operation.addEventListener('click', clickOperation, false);
-    operation.addEventListener('click', function() {
+    operation.addEventListener('click', function() { // temporary
         console.log({
             currentNumber: currentNumber,
             storedNumber: storedNumber
-        })
-    })
+        });
+    });
 });
 
 equals.addEventListener('click', equaling);
-equals.addEventListener('click', function(){
+equals.addEventListener('click', function(){ // temporary
     console.log({
             currentNumber: currentNumber,
             storedNumber: storedNumber
@@ -260,3 +262,30 @@ function resetFlags() {
     isMultiplying = false;
     isEqualing = false;
 }
+
+let count = 0;
+empty.addEventListener('click', function(){
+    count++;
+    
+    switch(count) {
+        case 5:
+            alert(':)');
+            break;
+        case 10:
+            alert(':S');
+            break;
+        case 15:
+            alert('wat?');
+            break;
+        case 25:
+            alert('stop...');
+            break;
+        case 50:
+            alert('these are all the hidden messages');
+            break;
+        case 51:
+            count = 0;
+    }
+    
+    console.log(count);
+});
