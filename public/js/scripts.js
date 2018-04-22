@@ -247,16 +247,13 @@ function clickOperation(ev) {
 function operate() {
     if (isDividing) {
         storedNumber = dividing(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isSubtracting) {
         storedNumber = subtracting(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isAdding) {
         storedNumber = adding(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isMultiplying) {
         storedNumber = multiplying(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     }
+    displayString.textContent = "" + storedNumber;
     currentNumber = 0;
 }
