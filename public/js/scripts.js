@@ -39,7 +39,7 @@ let isAdding = false;
 let isSubtracting = false;
 let isMultiplying = false;
 let isDividing = false;
-let isEqualling = false;
+let isEqualing = false;
 
 // data storage
 let storedNumber = 0;
@@ -76,7 +76,7 @@ equals.addEventListener('click', function(ev) {
         displayString.textContent = "" + storedNumber;
     }
     resetFlags();
-    isEqualling = true;
+    isEqualing = true;
     isOperating = false;
 });
 
@@ -95,7 +95,7 @@ del.addEventListener('click', function(ev) {
     console.log('I am deleting!');
     let displayStringLen = displayString.textContent.length;
     
-    if (isOperating || isEqualling) {
+    if (isOperating || isEqualing) {
         return;
     } else if (displayStringLen === 1) {
         currentNumber = 0;
@@ -176,7 +176,7 @@ function resetFlags() {
     isDividing = false;
     isAdding = false;
     isMultiplying = false;
-    isEqualling = false;
+    isEqualing = false;
 }
 
 function adding(a, b) {
@@ -200,15 +200,15 @@ operations.forEach(function(operation) {
 function clickOperation(ev) {
     
     // flags are resetting to false at some point
-    if (!isOperating) {
+    if (isOperating === false) {
         storedNumber = currentNumber;
         currentNumber = 0;
+        isOperating = true;
     } else {
         operate();
     }
     
     resetFlags();
-    isOperating = true;
     switch(ev.target.id) {
         case 'add':
             console.log('adding');
@@ -258,6 +258,5 @@ function operate() {
         storedNumber = multiplying(storedNumber, currentNumber);
         displayString.textContent = "" + storedNumber;
     }
-    resetFlags();
     currentNumber = 0;
 }
