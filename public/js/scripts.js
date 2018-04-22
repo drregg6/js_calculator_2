@@ -42,39 +42,34 @@ let storedNumber = 0;
 let currentNumber = 0;
 
 
-// pressing each button effects the css
-buttons.forEach(function(button) {
+// event listeners
+
+buttons.forEach(function(button) { // changing the css
     button.addEventListener('mousedown', pressingDown, false);
     button.addEventListener('mouseup', pressingUp, false);
 });
 
-numbers.forEach(function(number) {
+numbers.forEach(function(number) { // updating data and display
     number.addEventListener('click', updateCurrentNumber, false);
 });
 
-operations.forEach(function(operation) {
+operations.forEach(function(operation) { // performing operations
     operation.addEventListener('click', clickOperation, false);
 });
 
-clear.addEventListener('click', resetCalculator);
-
-
-
+clear.addEventListener('click', resetCalculator); // clearing
 
 equals.addEventListener('click', function(ev) {
     if (isAdding) {
         storedNumber = adding(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isSubtracting) {
         storedNumber = subtracting(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isMultiplying) {
         storedNumber = multiplying(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     } else if (isDividing) {
         storedNumber = dividing(storedNumber, currentNumber);
-        displayString.textContent = "" + storedNumber;
     }
+    displayString.textContent = "" + storedNumber;
     resetFlags();
     isEqualing = true;
 });
@@ -127,12 +122,20 @@ window.addEventListener('keyup', function(ev) {
 });
 
 
+
+// event listener methods
+
 function updateCurrentNumber(buttonPressed) {
     let pressedString = this.firstChild.nextSibling;
     let pressedInt = parseInt(pressedString.textContent);
 
     if (displayString.textContent.length === 18) {
         return;
+    } else if (isEqualing) {
+        isEqualing = false;
+        storedNumber = 0;
+        displayString.textContent = pressedString.textContent;
+        currentNumber = pressedInt;
     } else if (currentNumber === 0) {
         displayString.textContent = pressedString.textContent;
         currentNumber = pressedInt;
@@ -147,46 +150,6 @@ function updateCurrentNumber(buttonPressed) {
     });
 }
 
-function pressingDown(ev) {
-    this.classList.add('button-pressed');
-}
-function pressingUp(ev) {
-    this.classList.remove('button-pressed');
-}
-
-function backspace(str) {
-    return str.slice(0,str.length-1);
-}
-
-function resetCalculator() {
-    resetFlags();
-    storedNumber = 0;
-    currentNumber = 0;
-    displayString.textContent = currentNumber.toString();
-}
-
-function resetFlags() {
-    isSubtracting = false;
-    isDividing = false;
-    isAdding = false;
-    isMultiplying = false;
-    isEqualing = false;
-}
-
-function adding(a, b) {
-    return a + b;
-}
-function subtracting(a, b) {
-    return a - b;
-}
-function multiplying(a, b) {
-    return a * b;
-}
-function dividing(a, b) {
-    return a / b;
-}
-
-// operation flags will reset and one will not turn on
 function clickOperation(ev) {
     
     if (storedNumber === 0) { // beginning an operation
@@ -213,6 +176,28 @@ function clickOperation(ev) {
     }
 }
 
+function pressingDown(ev) {
+    this.classList.add('button-pressed');
+}
+function pressingUp(ev) {
+    this.classList.remove('button-pressed');
+}
+
+function resetCalculator() {
+    resetFlags();
+    storedNumber = 0;
+    currentNumber = 0;
+    displayString.textContent = currentNumber.toString();
+}
+
+
+
+// helper methods
+
+function backspace(str) {
+    return str.slice(0,str.length-1);
+}
+
 function operate() {
     if (currentNumber !== 0) {
         if (isDividing) {
@@ -228,4 +213,25 @@ function operate() {
     resetFlags(); // flags restored as clickevent continues
     displayString.textContent = "" + storedNumber;
     currentNumber = 0;
+}
+
+function adding(a, b) {
+    return a + b;
+}
+function subtracting(a, b) {
+    return a - b;
+}
+function multiplying(a, b) {
+    return a * b;
+}
+function dividing(a, b) {
+    return a / b;
+}
+
+function resetFlags() {
+    isSubtracting = false;
+    isDividing = false;
+    isAdding = false;
+    isMultiplying = false;
+    isEqualing = false;
 }
