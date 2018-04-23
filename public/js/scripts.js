@@ -1,7 +1,6 @@
 /*
 
-TODO: limit the length of digits when a value is operated
-TODO: implement decimal (.) --> map out how it should work
+TODO: limit the length of digits when a value is operated --> if length > 18, round to 18 spaces
 TODO: keypress should effect currentNumber and displayScreen
 TODO: figure out how to get the plus and multiply keypress to work
             (it doesn't work with the shift + equals and shift + eight)
@@ -80,13 +79,19 @@ clear.addEventListener('click', resetCalculator); // clearing
 // event listeners for special keys
 plusMinus.addEventListener('click', posToNeg);
 decimal.addEventListener('click', function(ev) {
-    if (displayString.textContent.indexOf(".") !== -1) {
+    if (displayString.textContent.indexOf(".") !== -1 && currentNumber !== 0) {
         return;
     } else if (currentNumber === 0) {
         displayString.textContent = '0.';
+        currentNumber = NaN;
     } else {
         displayString.textContent = displayString.textContent + '.';
     }
+    
+    console.log({
+        currentNumber: currentNumber,
+        storedNumber: storedNumber
+    })
 });
 
 // listening for keypress on the window
@@ -132,12 +137,13 @@ function updateCurrentNumber(buttonPressed) { // this can probably be broken apa
     } else if (currentNumber === 0) {
         displayString.textContent = pressedString.textContent;
         currentNumber = pressedInt;
-//    } else if (displayString.textContent.charAt(displayStringLen-1) === '.') {
-//        displayString.textContent = displayString.textContent + pressedString.textContent;
-//        currentNumber = Number(displayString.textContent);
+    } else if (displayString.textContent === '0.') {
+        console.log(pressedInt);
+        currentNumber = parseFloat(displayString.textContent + pressedString.textContent);
+        displayString.textContent = "" + currentNumber;
     } else {
         currentNumber = parseFloat(displayString.textContent + pressedString.textContent);
-        displayString.textContent = displayString.textContent + pressedString.textContent;
+        displayString.textContent = "" + currentNumber;
     }
     
     console.log({
