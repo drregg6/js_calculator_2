@@ -1,11 +1,11 @@
 /*
 
-TODO: limit the length of digits when a value is operated --> if length > 18, round to 18 spaces
 TODO: keypress should effect currentNumber and displayScreen
 TODO: figure out how to get the plus and multiply keypress to work
             (it doesn't work with the shift + equals and shift + eight)
 TODO: code can be cleaned
 TODO: send helpers into a new file
+TODO: i should comment this code
 
 */
 
@@ -57,42 +57,17 @@ numbers.forEach(function(number) { // updating data and display
 
 operations.forEach(function(operation) { // performing operations
     operation.addEventListener('click', clickOperation, false);
-    operation.addEventListener('click', function() { // temporary
-        console.log({
-            currentNumber: currentNumber,
-            storedNumber: storedNumber
-        });
-    });
 });
 
 equals.addEventListener('click', equaling);
-equals.addEventListener('click', function(){ // temporary
-    console.log({
-            currentNumber: currentNumber,
-            storedNumber: storedNumber
-        })
-})
+
 // event listeners for deleting
 del.addEventListener('click', backspace);
-clear.addEventListener('click', resetCalculator); // clearing
+clear.addEventListener('click', resetCalculator);
 
 // event listeners for special keys
 plusMinus.addEventListener('click', posToNeg);
-decimal.addEventListener('click', function(ev) {
-    if (displayString.textContent.indexOf(".") !== -1 && currentNumber !== 0) {
-        return;
-    } else if (currentNumber === 0) {
-        displayString.textContent = '0.';
-        currentNumber = NaN;
-    } else {
-        displayString.textContent = displayString.textContent + '.';
-    }
-    
-    console.log({
-        currentNumber: currentNumber,
-        storedNumber: storedNumber
-    })
-});
+decimal.addEventListener('click', floatingNumber);
 
 // listening for keypress on the window
 window.addEventListener('keydown', function(ev) {
@@ -184,12 +159,27 @@ function equaling(ev) {
 }
 
 function posToNeg() {
-    // a result cannot be 
     if (storedNumber !== 0 && currentNumber === 0 || isEqualing) {
         return;
     } else if (currentNumber > 0 || currentNumber < 0) {
         currentNumber = currentNumber * -1;
         displayString.textContent = "" + currentNumber;
+    }
+    
+    console.log({
+        currentNumber: currentNumber,
+        storedNumber: storedNumber
+    })
+}
+
+function floatingNumber() {
+    if (displayString.textContent.indexOf(".") !== -1 && currentNumber !== 0) {
+        return;
+    } else if (currentNumber === 0) {
+        displayString.textContent = '0.';
+        currentNumber = NaN;
+    } else {
+        displayString.textContent = displayString.textContent + '.';
     }
     
     console.log({
@@ -268,6 +258,9 @@ function resetFlags() {
     isMultiplying = false;
     isEqualing = false;
 }
+
+
+// little side game
 
 let count = 0;
 empty.addEventListener('click', function(){
