@@ -7,7 +7,7 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
 |                                           |
 |                                           |
 |------------------------------------|
-|   CL   |   DEL   |          |   +   |
+|   CE   |    C    |   DEL    |   +   |
 |------------------------------------|
 |    7    |    8     |    9     |   --   |
 |------------------------------------|
@@ -28,23 +28,28 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
     <title>Javascript Calculator</title>
     
     <!-- bootstrap cdn -->
-    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/styles_test.css">
 </head>
 
 <body>
     <section class="calculator">
         <section class="screen">
-            <p>0</p>
+            <div id="currentOperation">
+                <p></p>
+            </div>
+            <div id="display">
+                <p>0</p>
+            </div>
         </section>
         <section class="buttons">
+            <div class="button special" id="clear_entry">
+                <p>CE</p>
+            </div>
             <div class="button special" id="clear">
-                <p>CL</p>
+                <p>C</p>
             </div>
             <div class="button special" id="delete">
                 <p>DEL</p>
-            </div>
-            <div class="button" id="empty">
-                <p></p>
             </div>
             <div class="button special operation" id="add">
                 &plus;
@@ -108,6 +113,6 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
         </section>
     </section>
     <!-- jq cdn -->
-    <script src="public/js/scripts.js"></script>
+    <script src="public/js/scripts_test.js"></script>
 </body>
 </html>
