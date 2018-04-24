@@ -134,7 +134,7 @@ function updatecurrentNum(buttonPressed) { // this can probably be broken apart 
 
 function clickOperation(ev) {
 
-	let operationNum;
+    let operationNum;
     
     if (storedNum === 0) { // beginning an operation
         storedNum = currentNum;
