@@ -61,7 +61,7 @@ operations.forEach(function(operation) { // performing operations
 equals.addEventListener('click', equaling); // completing operations
 
 // event listeners for deleting
-del.addEventListener('click', backspace); // go back one digit
+del.addEventListener('click', deleting); // go back one digit
 clear.addEventListener('click', resetCalculator); // start anew
 
 // event listeners for special keys
@@ -160,6 +160,9 @@ function clickOperation(ev) {
 function equaling(ev) {
     // the same as operating, but has a different effect on operation and number clicks
     // so I need a flag to keep track of equaling
+    if (storedNum === 0) {
+        return;
+    }
     operate();
     isEqualing = true;
 }
@@ -208,7 +211,7 @@ function pressUp(ev) {
     this.classList.remove('button-pressed');
 }
 
-function backspace() {
+function deleting() {
     let displayStringLen = displayString.textContent.length;
     
     if (displayStringLen === 1) {
