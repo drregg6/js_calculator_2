@@ -165,7 +165,7 @@ function clickOperation(ev) {
                 break;
             case 'divide':
                 isDividing = true;
-                operationString.textContent += operationNum + " \xF7 " \\ xF7 is division sign
+                operationString.textContent += operationNum + " \xF7 "; \\ xF7 is division sign
                 break;
     }
 }
