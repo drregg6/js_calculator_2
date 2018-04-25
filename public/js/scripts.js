@@ -19,16 +19,16 @@ const subtract = document.querySelector('#subtract');
 const divide = document.querySelector('#divide');
 const multiply = document.querySelector('#multiply');
 const equals = document.querySelector('#equals');
-const empty = document.querySelector('#empty');
 // special keys
+const ce = document.querySelector('#clear_entry');
 const clear = document.querySelector('#clear');
 const del = document.querySelector('#delete');
 const decimal = document.querySelector('#decimal');
 const plusMinus = document.querySelector('#plus-minus');
 
 // screen
-const screen = document.querySelector('.screen');
-let displayString = screen.firstChild.nextSibling;
+let operationString = document.querySelector('#currentOperation');
+let displayString = document.querySelector('#display').firstChild.nextSibling;
 
 // operations flags
 let isAdding = false;
@@ -36,10 +36,12 @@ let isSubtracting = false;
 let isMultiplying = false;
 let isDividing = false;
 let isEqualing = false;
+let isFloating = false;
 
 // data storage
 let storedNum = 0;
 let currentNum = 0;
+let floatString;
 
 
 
@@ -61,8 +63,9 @@ operations.forEach(function(operation) { // performing operations
 equals.addEventListener('click', equaling); // completing operations
 
 // event listeners for deleting
-del.addEventListener('click', deleting); // go back one digit
-clear.addEventListener('click', resetCalculator); // start anew
+del.addEventListener('click', erase); // go back one digit
+clear.addEventListener('click', clearCalc); // start anew
+ce.addEventListener('click', clearEntry); // delete current input but continue operation in progress
 
 // event listeners for special keys
 plusMinus.addEventListener('click', posToNeg); // swap between positive and negative
@@ -103,25 +106,25 @@ window.addEventListener('keyup', function(ev) {
 
 function updatecurrentNum(buttonPressed) { // this can probably be broken apart somewhere
     let displayStringLen = displayString.textContent.length;
-    let pressedString = this.firstChild.nextSibling;
-    let pressedNum = parseFloat(pressedString.textContent);
+    let pressedString = this.firstChild.nextSibling.textContent;
+    let pressedNum = parseFloat(pressedString);
 
     if (displayString.textContent.length === 18) {
         return;
     } else if (isEqualing) {
         isEqualing = false;
         storedNum = 0;
-        displayString.textContent = pressedString.textContent;
+        displayString.textContent = pressedString;
         currentNum = pressedNum;
+    } else if (isFloating) {
+	floatString += pressedString;
+	displayString.textContent = floatString;
+	currentNum = parseFloat(floatString);
     } else if (currentNum === 0) {
-        displayString.textContent = pressedString.textContent;
+        displayString.textContent = pressedString;
         currentNum = pressedNum;
-    } else if (displayString.textContent === '0.') {
-        console.log(pressedNum);
-        currentNum = parseFloat(displayString.textContent + pressedString.textContent);
-        displayString.textContent = "" + currentNum;
     } else {
-        currentNum = parseFloat(displayString.textContent + pressedString.textContent);
+        currentNum = parseFloat(displayString.textContent + pressedString);
         displayString.textContent = "" + currentNum;
     }
     
@@ -132,27 +135,40 @@ function updatecurrentNum(buttonPressed) { // this can probably be broken apart 
 }
 
 function clickOperation(ev) {
+
+    let operationNum;
     
     if (storedNum === 0) { // beginning an operation
         storedNum = currentNum;
+        operationNum = storedNum;
     } else { // continuing an operation
+    	if (isEqualing) {
+    		operationNum = storedNum;
+    	} else {
+    		operationNum = currentNum;
+    	}
         operate();
     }
     currentNum = 0;
+    isFloating = false;
     
     // wave a flag to detect what kind of operation to perform
     switch(ev.target.id) {
             case 'add':
                 isAdding = true;
+                operationString.textContent += operationNum + " + ";
                 break;
             case 'subtract':
                 isSubtracting = true;
+                operationString.textContent += operationNum + " - ";
                 break;
             case 'multiply':
                 isMultiplying = true;
+                operationString.textContent += operationNum + " x ";
                 break;
             case 'divide':
                 isDividing = true;
+                operationString.textContent += operationNum + " \xF7 "; // xF7 is division sign
                 break;
     }
 }
@@ -160,11 +176,9 @@ function clickOperation(ev) {
 function equaling(ev) {
     // the same as operating, but has a different effect on operation and number clicks
     // so I need a flag to keep track of equaling
-    if (storedNum === 0) {
-        return;
-    }
     operate();
     isEqualing = true;
+    operationString.textContent = "";
 }
 
 function posToNeg() {
@@ -189,6 +203,8 @@ function floatingNumber() {
     //      user clicks #decimal to create "0.4"
     //      but since displayString.textContent.indexOf(".") !== -1
     //      #decimal cannot be used
+    /*
+    broken
     if (displayString.textContent.indexOf(".") !== -1 && currentNum !== 0) {
         return;
     } else if (currentNum === 0) {
@@ -197,6 +213,13 @@ function floatingNumber() {
     } else {
         displayString.textContent = displayString.textContent + '.';
     }
+    */
+    if (isFloating) {
+        return;
+    }
+    isFloating = true;
+    floatString = currentNum + ".";
+    displayString.textContent = floatString;
     
     console.log({
         currentNum: currentNum,
@@ -211,23 +234,32 @@ function pressUp(ev) {
     this.classList.remove('button-pressed');
 }
 
-function deleting() {
-    let displayStringLen = displayString.textContent.length;
-    
-    if (displayStringLen === 1) {
-        currentNum = 0;
-        displayString.textContent = currentNum.toString();
-    } else {
-        currentNum = backspace(displayString.textContent);
-        displayString.textContent = "" + currentNum;
-    }
+function erase() {
+	if (isEqualing === false) {
+    	let displayStringLen = displayString.textContent.length;
+
+	    if (displayStringLen === 1) {
+	        currentNum = 0;
+	        displayString.textContent = currentNum.toString();
+	    } else {
+	        currentNum = parseInt(backspace(displayString.textContent));
+	        displayString.textContent = "" + currentNum;
+	    }
+	}
 }
 
-function resetCalculator() {
+function clearCalc() {
     resetFlags();
     storedNum = 0;
     currentNum = 0;
     displayString.textContent = currentNum.toString();
+    operationString.textContent = "";
+}
+
+function clearEntry() {
+	currentNum = 0;
+	isFloating = false;
+	displayString.textContent = currentNum.toString();
 }
 
 
@@ -235,6 +267,7 @@ function resetCalculator() {
 // helper methods
 
 function backspace(str) {
+    console.log(str);
     return str.slice(0,str.length-1);
 }
 
@@ -248,6 +281,8 @@ function operate() {
             storedNum = adding(storedNum, currentNum);
         } else if (isMultiplying) {
             storedNum = multiplying(storedNum, currentNum);
+        } else if (storedNum === 0 && currentNum !== 0) {
+        	storedNum = currentNum;
         }
     }
     resetFlags(); // flags restored as clickevent continues
@@ -273,34 +308,5 @@ function resetFlags() {
     isAdding = false;
     isMultiplying = false;
     isEqualing = false;
+    isFloating = false;
 }
-
-
-// little side game
-
-let count = 0;
-empty.addEventListener('click', function(){
-    count++;
-    
-    switch(count) {
-        case 5:
-            alert(':)');
-            break;
-        case 10:
-            alert(':S');
-            break;
-        case 15:
-            alert('wat?');
-            break;
-        case 25:
-            alert('stop...');
-            break;
-        case 50:
-            alert('these are all the hidden messages');
-            break;
-        case 51:
-            count = 0;
-    }
-    
-    console.log(count);
-});

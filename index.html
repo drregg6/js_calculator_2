@@ -7,9 +7,6 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
 |                                           |
 |                                           |
 |------------------------------------|
-|  NEW |           |           |        |
-|------------------------------------|
-|   CL   |   DEL   |          |   +   |
 |------------------------------------|
 |    7    |    8     |    9     |   --   |
 |------------------------------------|
@@ -36,17 +33,22 @@ EASY PEASY AND DIFFERENT FROM THE LAST ONE :]
 <body>
     <section class="calculator">
         <section class="screen">
-            <p>0</p>
+            <div id="currentOperation">
+                <p></p>
+            </div>
+            <div id="display">
+                <p>0</p>
+            </div>
         </section>
         <section class="buttons">
+            <div class="button special" id="clear_entry">
+                <p>CE</p>
+            </div>
             <div class="button special" id="clear">
-                <p>CL</p>
+                <p>C</p>
             </div>
             <div class="button special" id="delete">
                 <p>DEL</p>
-            </div>
-            <div class="button" id="empty">
-                <p></p>
             </div>
             <div class="button special operation" id="add">
                 &plus;
