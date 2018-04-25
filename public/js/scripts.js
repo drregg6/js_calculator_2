@@ -36,10 +36,12 @@ let isSubtracting = false;
 let isMultiplying = false;
 let isDividing = false;
 let isEqualing = false;
+let isFloating = false;
 
 // data storage
 let storedNum = 0;
 let currentNum = 0;
+let floatString;
 
 
 
@@ -104,25 +106,25 @@ window.addEventListener('keyup', function(ev) {
 
 function updatecurrentNum(buttonPressed) { // this can probably be broken apart somewhere
     let displayStringLen = displayString.textContent.length;
-    let pressedString = this.firstChild.nextSibling;
-    let pressedNum = parseFloat(pressedString.textContent);
+    let pressedString = this.firstChild.nextSibling.textContent;
+    let pressedNum = parseFloat(pressedString);
 
     if (displayString.textContent.length === 18) {
         return;
     } else if (isEqualing) {
         isEqualing = false;
         storedNum = 0;
-        displayString.textContent = pressedString.textContent;
+        displayString.textContent = pressedString;
         currentNum = pressedNum;
+    } else if (isFloating) {
+	floatString += pressedString;
+	displayString.textContent = floatString;
+	currentNum = parseFloat(floatString);
     } else if (currentNum === 0) {
-        displayString.textContent = pressedString.textContent;
+        displayString.textContent = pressedString;
         currentNum = pressedNum;
-    } else if (displayString.textContent === '0.') {
-        console.log(pressedNum);
-        currentNum = parseFloat(displayString.textContent + pressedString.textContent);
-        displayString.textContent = "" + currentNum;
     } else {
-        currentNum = parseFloat(displayString.textContent + pressedString.textContent);
+        currentNum = parseFloat(displayString.textContent + pressedString);
         displayString.textContent = "" + currentNum;
     }
     
@@ -148,6 +150,7 @@ function clickOperation(ev) {
         operate();
     }
     currentNum = 0;
+    isFloating = false;
     
     // wave a flag to detect what kind of operation to perform
     switch(ev.target.id) {
@@ -200,6 +203,8 @@ function floatingNumber() {
     //      user clicks #decimal to create "0.4"
     //      but since displayString.textContent.indexOf(".") !== -1
     //      #decimal cannot be used
+    /*
+    broken
     if (displayString.textContent.indexOf(".") !== -1 && currentNum !== 0) {
         return;
     } else if (currentNum === 0) {
@@ -208,6 +213,13 @@ function floatingNumber() {
     } else {
         displayString.textContent = displayString.textContent + '.';
     }
+    */
+    if (isFloating) {
+        return;
+    }
+    isFloating = true;
+    floatString = currentNum + ".";
+    displayString.textContent = floatString;
     
     console.log({
         currentNum: currentNum,
@@ -246,6 +258,7 @@ function clearCalc() {
 
 function clearEntry() {
 	currentNum = 0;
+	isFloating = false;
 	displayString.textContent = currentNum.toString();
 }
 
@@ -295,4 +308,5 @@ function resetFlags() {
     isAdding = false;
     isMultiplying = false;
     isEqualing = false;
+    isFloating = false;
 }
