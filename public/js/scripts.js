@@ -137,6 +137,10 @@ function updatecurrentNum(buttonPressed) { // this can probably be broken apart 
 function clickOperation(ev) {
 
     let operationNum;
+
+    if (storedNum === Infinity || storedNum === NaN) {
+        return;
+    }
     
     if (storedNum === 0) { // beginning an operation
         storedNum = currentNum;
@@ -214,7 +218,7 @@ function floatingNumber() {
         displayString.textContent = displayString.textContent + '.';
     }
     */
-    if (isFloating) {
+    if (isFloating || isEqualing || storedNum === Infinity) {
         return;
     }
     isFloating = true;
@@ -272,19 +276,19 @@ function backspace(str) {
 }
 
 function operate() {
-    if (currentNum !== 0) {
-        if (isDividing) {
-            storedNum = dividing(storedNum, currentNum);
-        } else if (isSubtracting) {
-            storedNum = subtracting(storedNum, currentNum);
-        } else if (isAdding) {
-            storedNum = adding(storedNum, currentNum);
-        } else if (isMultiplying) {
-            storedNum = multiplying(storedNum, currentNum);
-        } else if (storedNum === 0 && currentNum !== 0) {
-        	storedNum = currentNum;
-        }
+    if (isDividing) {
+        storedNum = dividing(storedNum, currentNum);
+    } else if (isSubtracting) {
+        storedNum = subtracting(storedNum, currentNum);
+    } else if (isAdding) {
+        storedNum = adding(storedNum, currentNum);
+    } else if (isMultiplying) {
+        storedNum = multiplying(storedNum, currentNum);
+    } else if (storedNum === 0 && currentNum !== 0) {
+    	storedNum = currentNum;
     }
+    console.log({storedNum: storedNum,
+                 currentNum: currentNum});
     resetFlags(); // flags restored as clickevent continues
     displayString.textContent = "" + storedNum;
 }
@@ -299,6 +303,9 @@ function multiplying(a, b) {
     return a * b;
 }
 function dividing(a, b) {
+    if (a === 0 && b === 0) {
+        return Infinity;
+    }
     return a / b;
 }
 
