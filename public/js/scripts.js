@@ -138,7 +138,7 @@ function clickOperation(ev) {
 
     let operationNum;
 
-    if (storedNum === Infinity || storedNum === NaN) {
+    if (storedNum === Infinity) {
         return;
     }
     
